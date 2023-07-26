@@ -7,7 +7,7 @@ By Blake Dennett
 
 * <a href="#Project-Summary">Project Summary</a>
 
-<a href="#visualizations">visualizations</a>
+<a href="#Visualizations">Visualizations</a>
 
 <a href="#usage">Usage</a>
 <a href="#roadmap">Roadmap</a>
@@ -16,7 +16,7 @@ By Blake Dennett
 <a href="#contact">Contact</a>
 <a href="#acknowledgments">Acknowledgments</a>
 
-<a href="#visualizations">visualizations</a>
+<a href="#Visualizations">Visualizations</a>
 
 ya
 ya
@@ -46,4 +46,4 @@ ya
 ## Acknowledgments
 
 
-## visualizations
+## Visualizations
