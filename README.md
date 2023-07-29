@@ -2,7 +2,7 @@
 
 <h1 style="text-align:center;">Loan Approval Project</h1>
 
-<p style="text-align:center">By Blake Dennett<p>
+<p style="text-align:center;">By Blake Dennett<p>
 
 
 <h1>Table of Contents</h1>
@@ -48,7 +48,28 @@
 
 <img src="./images/DistributionGraphs.PNG">
 
-<br><br><br>
+<br><br>
+
+<img src="./images/CibilStatusScatter.PNG">
+
+<h6>Clearly, the bank sets a fairly hard limit with anyone below a 550 credit score, with the occasional exception.</h6>
+<h6>In choosing this data, it seems as though it was first filtered due to its clear lack of outliers.</h6><h6>Because the graph is so dense, I used DAX to create a new column to limit the number of points by half.</h6>
+
+```
+    filtered_cibil = 
+    SWITCH(
+        TRUE(),
+        MOD(loan_approval_dataset[loan_id], 2) = 0, BLANK(),
+        loan_approval_dataset[ cibil_score]
+    )
+```  
+
+<br><br>
+
+<img src="./images/AssetLoanTerm.PNG">
+
+
+<br><br>
 
 <img src="./images/IncomeDependentGraph.PNG" alt="Income Dependent Graph">
 

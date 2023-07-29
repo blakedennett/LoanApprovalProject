@@ -13,6 +13,7 @@
 * Made income/dependents graph
 * Learned: change axes, add line, effects like fonts and colors
 
+
 ### Day 03
 * Correlation Heat Map w/ Python
 * Made three bar charts
@@ -20,6 +21,17 @@
 
 
 ### Day 04
+* Added fourth bar chart
+* Made cluster of distributions
+* Learned: histogram on Power Bi, how to create new visuals not provided, and other small features
+
+
+### Day 05
+* Scatter plot with legend
+* Used DAX to make new column
+* Tried to display the charts from the Power Bi file rather than an image
+
+### Day 06
 * 
 * 
 * 
