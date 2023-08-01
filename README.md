@@ -35,14 +35,14 @@
 
 <h6>The credit score has a huge average difference for rejected and approved loans while education, self-employment, and the term of the loan don't seem to be impactful.</h6>
 
-<br>
+<br><br>
 
 <img src="./images/FeatCorrGraph.PNG" alt="Income Dependent Graph">
 
 <h6>Bank, comercial, luxury assets have strong correlation as well as income and loan amount</h6>
 <h6>Loan term, cibil score, and number of dependents, however, do not correlate much with any other feature</h6>
 
-<br>
+<br><br>
 
 #### Feature Distributions 
 
@@ -66,15 +66,18 @@
 
 <br><br>
 
+#### Assests by Loan Term
+
 <img src="./images/AssetLoanTerm.PNG">
+
+
+<h6>Surprisingly, the luxury assets on average are by far the most expensive, followed by residential.</h6>
+<h6>Additionally, it appears that the asset values don't change too much by the loan term.</h6>
 
 
 <br><br>
 
 <img src="./images/IncomeDependentGraph.PNG" alt="Income Dependent Graph">
-
-
-
 
 
 

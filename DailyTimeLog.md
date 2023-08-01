@@ -31,7 +31,20 @@
 * Used DAX to make new column
 * Tried to display the charts from the Power Bi file rather than an image
 
+
 ### Day 06
+* Line graph with assests and loan terms
+* Benford's Law graphs
+* Learned to make a new table and some DAX
+
+
+### Day 07
+* tried moving column to new table
+* tried overlapping graphs
+* making Benford's graphs
+
+
+### Day 08
 * 
 * 
 * 
