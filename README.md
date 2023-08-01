@@ -37,6 +37,23 @@
 
 <br><br>
 
+#### Benford's Law
+
+<h6>Benford's law deals with the first digit of each number in an exponentially increasing set of values. It states that lower numbers should occur more frequently as seen in the graph below. This law is used for fraud detection.</h6>
+
+<img src="./images/BenfordExample.PNG">
+
+<img src="./images/BenfordActual.PNG">
+
+##### Interpretation
+
+
+<h6>Here are the actual results of a few of the features from this dataset. In comparison to the example above, it appears that the income column is far from the correct distribution while the others are relatively close.</h6>
+
+<h6>The data, however, only has 4,196 rows and therefore isn't big enough to completly make any final judgement. I'm not positive as the the exact reason that the income is so far off other than the data not being selected completely randomly.</h6>
+
+<br><br>
+
 <img src="./images/FeatCorrGraph.PNG" alt="Income Dependent Graph">
 
 <h6>Bank, comercial, luxury assets have strong correlation as well as income and loan amount</h6>
@@ -78,10 +95,6 @@
 <br><br>
 
 <img src="./images/IncomeDependentGraph.PNG" alt="Income Dependent Graph">
-
-
-
-
 
 
 

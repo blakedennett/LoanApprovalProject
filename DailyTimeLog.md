@@ -45,6 +45,11 @@
 
 
 ### Day 08
+* Cleaned up Benford's graphs
+* checked for missing values
+* looking for values outside of 3 standard deviations
+
+### Day 09
 * 
 * 
 * 
