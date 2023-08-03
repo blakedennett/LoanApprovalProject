@@ -113,7 +113,7 @@
 
 ### Outliers
 
-<h4>I looked into the continuous features for any values high or lower than three standard deviations from the average. There were 33 total that were above the upper limit and none below the lower. The values were split among the residential and comercial assets. I decided to take the values down to simply equal the upper limit.</h4>
+<h4>I looked into the numerical features for any values high or lower than three standard deviations from the average. There were 33 total that were above the upper limit and none below the lower. The values were split among the residential and comercial assets. I decided to take the values down to simply equal the upper limit.</h4>
 
 ### Negative Values
 
@@ -135,6 +135,10 @@
 
 <h4>Additionally, I took a look at the proportion of the loan to the income. The mean for the entire dataset is 2.88 (the loan being almost three times the annual income). On the other hand, the mean for the 13 rejected loans was 3.66. This seems to be another strong indicator of whether a loan is approved or rejected because a rule of thumb is that the annual income should be roughly a third of the loan.</h4>
 
+### Approvals Below a 550 Credit Score
+
+<h4>Again, looking at the Cibil Score scatter plot found above in the visualizations section, I found a few anomalies. There is a clear cut off at the 550 mark, but I wanted to dive into the approved loans that did fall short.</h4>
+
 ### Approved Vs Rejected
 
 |                     |Approved  |Rejected  |Difference|
@@ -151,7 +155,7 @@
 
 ### Interpretation
 
-<h4>In reality, the biggest finding here is that the credit score seems to be a huge indicator for whether a loan is approved or not. The rest of these values are hardly different and therefore do not seem to have much impact.</h4>
+<h4>In reality, the biggest finding here is that the credit score seems to be a huge indicator for whether a loan is approved or not. The rest of these values are hardly different and therefore do not seem to have much impact. My assumption is that the Cibil score is the first value evaluated and then further analysis is done from there.</h4>
 
 # Machine Learning
 

@@ -56,6 +56,11 @@
 
 
 ### Day 10
+* Made a table with approved vs rejected values
+* Cibil and Income graph
+* More credit score analysis
+
+### Day 11
 * 
 * 
 * 
