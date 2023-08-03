@@ -50,6 +50,12 @@
 * looking for values outside of 3 standard deviations
 
 ### Day 09
+* finished cleaning upper and lower limits
+* checked for out-of-place negative values
+* made a collateral / loan ratio column
+
+
+### Day 10
 * 
 * 
 * 
