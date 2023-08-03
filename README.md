@@ -26,10 +26,10 @@
 
 
 
-## Visualizations
+# Visualizations
 
 
-### Loan Status Comparisons 
+## Loan Status Comparisons 
 
 <img src="./images/TripleLoanStatus.PNG" alt="Income Dependent Graph">
 
@@ -37,7 +37,7 @@
 
 <br><br>
 
-### Benford's Law
+## Benford's Law
 
 <h4>Benford's law deals with the first digit of each number in an exponentially increasing set of values. It states that lower numbers should occur more frequently as seen in the graph below. This law is used for fraud detection.</h4>
 
@@ -61,7 +61,7 @@
 
 <br><br>
 
-### Feature Distributions 
+## Feature Distributions 
 
 <img src="./images/DistributionGraphs.PNG" alt="Distributions Graph">
 
@@ -134,6 +134,24 @@
 <h4>Looking at the credit score scatter plot found above, I decided to look into the few values that were above a 550 credit score but were still rejected. There were only 13 in total. The primary finding I found was that the collateral was low. The total collateral to loan ratio average for the 13 was 1.08 (meaning the collateral was the same or more than the loan) while the average ratio for the entire dataset was 0.489 (the collateral being about double the loan).</h4>
 
 <h4>Additionally, I took a look at the proportion of the loan to the income. The mean for the entire dataset is 2.88 (the loan being almost three times the annual income). On the other hand, the mean for the 13 rejected loans was 3.66. This seems to be another strong indicator of whether a loan is approved or rejected because a rule of thumb is that the annual income should be roughly a third of the loan.</h4>
+
+### Approved Vs Rejected
+
+|                     |Approved  |Rejected  |Difference|
+|---------------------|----------|----------|----------|
+|Credit Score         |711       |429       |282       |
+|Income               |5,000,000 |5,100,000 |-100,000  |
+|Loan Amount          |14,600,000|14,500,000|100,000   |
+|Total Colateral      |31,000,000|31,900,000|-900,000  |
+|Loan Collateral Ratio|0.473     |0.457     |0.016     |
+|Income to Loan Ratio |3.05      |2.88      |0.175     |
+|Dependents           |2.5       |3         |-0.5      |
+
+<h4>This table is the median of each respective row and column, which is why the values are so exact. (The length of the dataset is an odd number, therefore giving a middle number)</h4>
+
+### Interpretation
+
+<h4>In reality, the biggest finding here is that the credit score seems to be a huge indicator for whether a loan is approved or not. The rest of these values are hardly different and therefore do not seem to have much impact.</h4>
 
 # Machine Learning
 
