@@ -45,7 +45,7 @@
 
 <img src="./images/BenfordActual.PNG" alt="Benford's Law on a few features">
 
-#### Interpretation
+### Interpretation
 
 
 <h4>Here are the actual results of a few of the features from this dataset. In comparison to the example above, it appears that the income column is far from the correct distribution while the others are relatively close.</h4>
@@ -103,33 +103,33 @@
 
 * <a href="./analysis.ipynb">Analysis Code</a>
 
-### Data Cleaning
+## Data Cleaning
 
 <h4>The dataset was very clean. This was unfortunate because I wanted some extra pratice working with more difficult data.</h4>
 
-#### Missing Values
+### Missing Values
 
 <h4>There were no missing values in the data, nor were there any incomplete entries in any of the categorical data.</h4>
 
-#### Outliers
+### Outliers
 
 <h4>I looked into the continuous features for any values high or lower than three standard deviations from the average. There were 33 total that were above the upper limit and none below the lower. The values were split among the residential and comercial assets. I decided to take the values down to simply equal the upper limit.</h4>
 
-#### Negative Values
+### Negative Values
 
 <h4>There were 28 negative values in the data. All were from the residential assests column and were the exact same value. I thought this was odd and found that most of the instances had different values in the rest of their respective rows. I'm not positve what the cause is, but I just changed them all to zero.</h4>
 
-### Analysis & Feature Engineering
+## Analysis & Feature Engineering
 
-#### Total Collateral & Loan Ratio
+### Total Collateral & Loan Ratio
 
 <h4>I created a new feature that was the sum of all the four assets. I then created a new column that was the ratio of the loan amount to the total collateral. I thought this would be a good indicator of the risk of the loan and will help me with both the machine learning later and further analysis.</h4>
 
-#### Loan Amount and Income Ratio
+### Loan Amount and Income Ratio
 
 <h4>I made a new column by taking the loan amount and dividing it by the annual income. The average is about 2.88. I thought this would be a valuable new feature because at a glance I could see if the income was too small to be able to support the debt in the future.</h4>
 
-#### Credit Score Odd Values
+### Credit Score Odd Values
 
 <h4>Looking at the credit score scatter plot found above, I decided to look into the few values that were above a 550 credit score but were still rejected. There were only 13 in total. The primary finding I found was that the collateral was low. The total collateral to loan ratio average for the 13 was 1.08 (meaning the collateral was the same or more than the loan) while the average ratio for the entire dataset was 0.489 (the collateral being about double the loan).</h4>
 
