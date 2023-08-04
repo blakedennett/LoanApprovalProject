@@ -61,7 +61,12 @@
 * More credit score analysis
 
 ### Day 11
-* 
-* 
-* 
-* 
+* income and collateral scatter plot 
+* further analysis on odd values
+* finished credit score analysis
+
+### Day 12
+*
+*
+*
+*

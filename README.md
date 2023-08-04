@@ -96,6 +96,16 @@
 
 <br><br>
 
+### Loan Amount by Income And Collateral
+
+<img src="./images/IncomeCollateral.PNG" alt="Income, Collateral, and Loan graph">
+
+<h4>This graphs compares two features I made which each compare the collateral or income to the loan amount. Surprisingly, as the loans become bigger proportionally to the income, the rejections seems to actually decrease. Additionally, the collateral doesn't seem to have too much impact. The only exception being that any case where the loan is the same or more than the total collateral are all rejected.</h4>
+
+<h4>I did some further analysis on the bottom-left section of this graph as well. The few rejected points in that cluster are surprising because they have both huge collateral and income in proportion to the loan amount. I looked into one and the only poor indicator was the credit score was only 472. Therefore, either the credit score mattered enough to the loan officer to reject this loan or there is missing information that may be intrinsic or something to do with additional debt that the individual may have had.</h4>
+
+<br><br>
+
 <img src="./images/IncomeDependentGraph.PNG" alt="Income Dependent Graph">
 
 
