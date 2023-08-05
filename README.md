@@ -169,6 +169,56 @@
 
 <h4>In reality, the biggest finding here is that the credit score seems to be a huge indicator for whether a loan is approved or not. The rest of these values are hardly different and therefore do not seem to have much impact. My assumption is that the Cibil score is the first value evaluated and then further analysis is done from there.</h4>
 
+### Correlation and P-Values
+
+<h4>Because the Cibil score seems to be such a primary tool to determine whether a loan is approved, I decided to compare every other numerical feature to it. I used a method called pearsonr from the scipy.stats package. This gave me the correlation and p-value between each feature and the Cibil score. Ultimately, there was very little correlation and each p-value was well above 0.05.</h4>
+
+no_of_dependents
+Pearson correlation coefficient: -0.009998469677432271
+p-value: 0.5136912487840075
+
+income_annum
+Pearson correlation coefficient: -0.02303442169986018
+p-value: 0.1323826070379217
+
+loan_amount
+Pearson correlation coefficient: -0.017034787023534382
+p-value: 0.2658086684763575
+
+loan_term
+Pearson correlation coefficient: 0.007809878429870913
+p-value: 0.609955527226155
+
+residential_assets_value
+Pearson correlation coefficient: -0.02414121331360626
+p-value: 0.11477332645819846
+
+commercial_assets_value
+Pearson correlation coefficient: 0.002559122155018209
+p-value: 0.8672455979184643
+
+luxury_assets_value
+Pearson correlation coefficient: -0.028617627946119942
+p-value: 0.06153354602205643
+
+bank_asset_value
+Pearson correlation coefficient: -0.01547827134015627
+p-value: 0.31197944849413606
+
+total_collateral
+Pearson correlation coefficient: -0.0236007645692033
+p-value: 0.12312703643389432
+
+loan_coll_ratio
+Pearson correlation coefficient: 0.0013049879654443949
+p-value: 0.9320707271067727
+
+loan_income_ratio
+Pearson correlation coefficient: 0.0029798244562687093
+p-value: 0.8456763917500009
+
+
+
 # Machine Learning
 
 ## Decision Tree
