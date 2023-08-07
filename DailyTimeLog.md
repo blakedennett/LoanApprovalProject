@@ -66,7 +66,12 @@
 * finished credit score analysis
 
 ### Day 12
-*
-*
-*
+* Deep asset analysis
+* correlations and p-values with credit score
+* spell checked my readme file
+
+### Day 13
+* Preprocessing for machine learning
+* feature importance chart
+* vanilla tree
 *
