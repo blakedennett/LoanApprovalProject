@@ -223,7 +223,29 @@
 
 <h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features. Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 four way training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
 
+#### Feature Importance
+
+<img src="./images/FeatImportanceGraph.PNG" alt="Feature Importance Graph">
+
+<h4>The primary finding in this graph was that the best feature by far is the Cibil score. Additionally, when I made my vanilla tree (more on that later), I found that my f1 score was 0.999 and my accuracy was 0.9988. I thought that this was way too easy, so I decided that for the rest of this project, I would have the Cibil score removed. Now my vanilla tree has a 0.66 f1 and a 0.57 accuracy. The following graph is what it looked like after removing that column.</h4>
+
+<img src="./images/FeatImportanceNoCibil.PNG" alt="Feature Importance Graph">
+
+<h4>I'm glad to see that the two primary features I made (the collateral and income divided by the loan amount) were both among the top three. Also, it seems that most of my predictions on which features would be most important were mostly in agreement to what the decision tree decided.</h4>
+
 ## Decision Tree
+
+#### Metrics
+
+<h4>Ultimately, the f1 score will be my number one metric in evaluating and selecting my model. This is because I want to take both precision (taking into account false positives) and recall (looking at false negatives) into account. I feel that the bank would like a model that doesn't necessarily take neither missing great loans nor approving poor loans as a higher priority. Therefore, I chose the f1 score which is the harmonic mean of precision and recall. I also chose accuracy as a secondary metric, because it works fine as a more general metric to look at.</h4>
+
+#### Vanilla Tree
+
+<h4>One way I decided to measure my progress was through making a vanilla tree. I used the decision tree classifier from sklearn and didn't add any hyperparameters nor did I remove any features hindering its performance. Therefore, my baseline accuracy and f1 score were 0.57 and 0.66, respectively.</h4>
+
+#### Model Selection Method
+
+#### Final Model Results
 
 ## Neural Network
 

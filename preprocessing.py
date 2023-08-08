@@ -40,12 +40,14 @@ df[' term_times_income'] = df[' loan_term'] * df[' income_annum']
 
 df[' col_times_term'] = df[' total_collateral'] * df[' loan_term']
 
+df[' lux_times_res'] = df[' luxury_assets_value'] * df[' residential_assets_value']
+
 # change numerical, categorical features to strings
 df[' no_of_dependents'] = df[' no_of_dependents'].astype(str)
 
 df[' loan_status'] = np.where(df[' loan_status'] == " Approved", 1, 0)
 
-# df.drop(columns=['loan_id'], inplace=True)
+df.drop(columns=['loan_id'], inplace=True)
 df.drop(columns=[' cibil_score'], inplace=True)
 
 df = pd.get_dummies(df)
@@ -70,7 +72,7 @@ feat_importances.sort_values(by='Importance', ascending=False, inplace=True)
 
 # Create the bar chart using Matplotlib
 plt.figure(figsize=(8, 6))
-plt.bar(feat_importances.index, feat_importances['Importance'], color='green')
+plt.bar(feat_importances.index, feat_importances['Importance'], color='#21EB2B')
 plt.xlabel('Features')
 plt.ylabel('Importance')
 plt.title('Feature Importances')
