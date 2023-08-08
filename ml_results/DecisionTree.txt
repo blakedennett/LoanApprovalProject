@@ -1,2 +1,15 @@
 
 
+Best so far: 0.7712230215827338
+Accuracy = 0.6276346604215457    max_depth: 27
+    min_samples_split: 3
+    min_samples_leaf: 4
+    max_features: None
+    criterion: gini
+    random_state: 42
+    class_weight: balanced
+    splitter: best
+    max_leaf_nodes: 52
+    min_impurity_decrease: 0.06399672188685503
+    min_weight_fraction_leaf: 0.008017908571198473
+

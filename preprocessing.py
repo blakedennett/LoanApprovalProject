@@ -53,7 +53,6 @@ df.drop(columns=[' cibil_score'], inplace=True)
 df = pd.get_dummies(df)
 
 holdout = df.sample(frac=0.1, random_state=42)
-holdout.drop(columns=[' loan_status'], inplace=True)
 
 x = df.drop(columns=[' loan_status'])
 y = df[' loan_status']
@@ -78,7 +77,11 @@ plt.ylabel('Importance')
 plt.title('Feature Importances')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
-plt.show()
 
-print(df.head())
+def main():
+    plt.show()
+    print(df.head())
+
+if __name__ == '__main__':
+    main()
 
