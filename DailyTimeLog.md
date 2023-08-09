@@ -74,4 +74,15 @@
 * Preprocessing for machine learning
 * feature importance chart
 * vanilla tree
+
+### Day 14
+* Decision Tree Classifier
+* Hyperparameter tuning
+* Bug fixes
+
+### Day 15
 *
+*
+*
+*
+
