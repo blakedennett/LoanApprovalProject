@@ -254,10 +254,10 @@
 
 |                   |Vanilla|DecisionTree|XGBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|-------|------------|-------|----------|------------|----------|
-|Validation F1      |0.645  |            |       |          |            |          |
-|Holdout F1         |0.637  |            |       |          |            |          |
-|Validation Accuracy|0.556  |            |       |          |            |          |
-|Holdout Accuracy   |0.555  |            |       |          |            |          |
+|Validation F1      |64.48  |77.18       |77.40  |77.22     |77.46       |75.37     |
+|Holdout F1         |63.74  |76.52       |76.86  |76.05     |**77.63**       |74.12     |
+|Validation Accuracy|55.62  |62.88       |63.58  |63.11     |63.47       |62.65     |
+|Holdout Accuracy   |55.50  |58.78       |**62.76**  |61.36     |62.30       |60.42     |
 
 ## Neural Network
 

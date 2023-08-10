@@ -1,0 +1,61 @@
+Best F1 so far: 0.7470997679814385
+Accuracy = 0.617096018735363
+Holdout F1 Score: 0.7326120556414221
+Holdout Accuracy = 0.594847775175644
+Hyperparameters:
+    weights: uniform
+    n_neighbors: 19
+    p: 1
+    algorithm: auto
+Number of features: 6
+Chosen Features:
+     total_collateral
+     no_of_dependents_1
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+Best F1 so far: 0.7526717557251908
+Accuracy = 0.6206088992974239
+Holdout F1 Score: 0.7292307692307691
+Holdout Accuracy = 0.5878220140515222
+Hyperparameters:
+    weights: uniform
+    n_neighbors: 27
+    p: 2
+    algorithm: ball_tree
+Number of features: 6
+Chosen Features:
+     luxury_assets_value
+     loan_term
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+Best F1 so far: 0.7536679536679537
+Accuracy = 0.6264637002341921
+Holdout F1 Score: 0.7411944869831547
+Holdout Accuracy = 0.6042154566744731
+Hyperparameters:
+    weights: uniform
+    n_neighbors: 27
+    p: 2
+    algorithm: auto
+Number of features: 14
+Chosen Features:
+     income_annum
+     total_collateral
+     no_of_dependents_2
+     no_of_dependents_5
+     no_of_dependents_1
+     loan_amount
+     education_ Graduate
+     residential_assets_value
+     no_of_dependents_0
+     no_of_dependents_3
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value

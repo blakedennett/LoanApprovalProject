@@ -86,8 +86,8 @@
 * Got models running in parrelel
 
 ### Day 16
-* 
-*
+* Random Forest Classifier
+* Parameter adjusments
 *
 *
 
