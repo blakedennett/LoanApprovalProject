@@ -8,3 +8,6 @@ import winsound
 winsound.Beep(350, 600)
 
 winsound.Beep(800, 600)
+
+
+winsound.Beep(350, 1800)

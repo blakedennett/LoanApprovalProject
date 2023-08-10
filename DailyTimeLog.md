@@ -81,7 +81,12 @@
 * Bug fixes
 
 ### Day 15
-*
+* XGBoost Classifier
+* Gaussian NB
+* Got models running in parrelel
+
+### Day 16
+* 
 *
 *
 *

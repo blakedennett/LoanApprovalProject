@@ -1,0 +1,24 @@
+Best F1 so far: 0.7722342733188721
+Accuracy = 0.6311475409836066
+Holdout F1 Score: 0.760522496371553
+Holdout Accuracy = 0.6135831381733021
+Number of features: 17
+Chosen Features:
+     no_of_dependents_2
+     loan_amount
+     self_employed_ No
+     income_annum
+     self_employed_ Yes
+     no_of_dependents_5
+     no_of_dependents_3
+     residential_assets_value
+     term_times_income
+     no_of_dependents_1
+     no_of_dependents_4
+     education_ Not Graduate
+     education_ Graduate
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+

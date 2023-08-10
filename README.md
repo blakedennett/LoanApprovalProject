@@ -66,6 +66,8 @@
 
 <br><br>
 
+### Feature Correlation
+
 <img src="./images/FeatCorrGraph.PNG" alt="Feature Correlation Graph">
 
 <h4>Bank, commercial, luxury assets have strong correlation as well as income and loan amount.</h4>
@@ -108,7 +110,7 @@
 
 <br><br>
 
-### Loan Amount by Income And Collateral
+### Loan Amount Ratios with Income And Collateral
 
 <img src="./images/IncomeCollateral.PNG" alt="Income, Collateral, and Loan graph">
 
@@ -139,7 +141,7 @@
 
 ### Negative Values
 
-<h4>There were 28 negative values in the data. All were from the residential assets column and were the exact same value. I thought this was odd and found that most of the instances had different values in the rest of their respective rows. I'm not positive what the cause is, but I just changed them all to zero.</h4>
+<h4>There were 28 negative values in the data. All were from the residential assets column and were the exact same value. I thought this was odd and found that most of the instances had different values in the rest of their respective rows. I'm not positive what the cause is. I decided to change them all to zero.</h4>
 
 ## Analysis & Feature Engineering
 
@@ -157,7 +159,7 @@
 
 <h4>Additionally, I took a look at the proportion of the loan to the income. The mean for the entire dataset is 2.88 (the loan being almost three times the annual income). On the other hand, the mean for the 13 rejected loans was 3.66. This seems to be another strong indicator of whether a loan is approved or rejected because a rule of thumb is that the annual income should be roughly a third of the loan.</h4>
 
-### Approvals Below a 550 Credit Score
+### Approvals Below a 550 Cibil Score
 
 <h4>Again, looking at the Cibil Score scatter plot found above in the visualizations section, I found a few anomalies. There is a clear cut off at the 550 mark, but I wanted to dive into the approved loans that did fall short. Overall, only 10.36% of the rows in the data that were below a 550 Credit Score were approved for the loan that was asked. I made a hypothesis by assuming that the rest of the major indicators of the records were much better than the average. My hypothesis was wrong. The average income of these points is lower than the total average while the loan amount is higher. Additionally, both the loan collateral ratio and the loan income ratio are worse in these instances. I am surprised that these specific cases were approved over others. The loan term is about 28% of the total average. This could be a reason that the banks approved these loans because the principal could be returned sooner. However, a lower term also means a higher payment.</h4>
 
@@ -201,7 +203,7 @@
 |Loan Income Ratio    |0.003      |0.85|
 
 
-### Asset Analysis
+### Missing Asset Analysis
 
 #### Residential Assets
 
@@ -245,9 +247,17 @@
 
 #### Model Selection Methododology
 
-<h4>For my model selection, I used a while loop that randomly selected the number of features and which to use as well as randomly selecting each hyperparameter. If an f1 score was found that was higher than any previous, the program would append to a text file, saving each hyperparameter with its validation and holdout scores. I made four of these while loops inside of separate functions that ran different types of decision trees. These were the GausianNB, XGBClassifier, RandomForest, and the plain DecisionTreeClassifier. I put these loops into four separate functions and ran them each in parrellel using the Python multiprocessing library. The best models were selected using the validation data, but ultimately, the holdout data is the one I used as the final results.</h4>
+<h4>For my model selection, I used a while loop that randomly selected the number of features and which to use as well as randomly selecting each hyperparameter. If an f1 score was found that was higher than any previous, the program would append to a text file, saving each hyperparameter with its validation and holdout scores. I made four of these while loops inside of separate functions that ran different types of decision trees. These were the GausianNB, XGBClassifier, RandomForest, and the plain DecisionTreeClassifier. I put these loops into four separate functions and ran them each in parrellel using the Python multiprocessing library. The best models were selected using the validation data, but ultimately, the holdout data is the one I used as the final results. I decided not to use any automatic hyperparameter tools like GridSearchCV and Ray Tune because I wanted to be more hands-on with the models.</h4>
 
 #### Final Model Results
+
+
+|                   |Vanilla|DecisionTree|XGBoost|GaussianNB|RandomForset|KNeighbors|
+|-------------------|-------|------------|-------|----------|------------|----------|
+|Validation F1      |0.645  |            |       |          |            |          |
+|Holdout F1         |0.637  |            |       |          |            |          |
+|Validation Accuracy|0.556  |            |       |          |            |          |
+|Holdout Accuracy   |0.555  |            |       |          |            |          |
 
 ## Neural Network
 
