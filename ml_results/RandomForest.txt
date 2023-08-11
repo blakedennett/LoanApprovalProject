@@ -29,6 +29,36 @@ Chosen Features:
      commercial_assets_value
      bank_asset_value
 
+Best F1 so far: 0.7744742567077594
+Accuracy = 0.6358313817330211
+Holdout F1 Score: 0.7634252539912917
+Holdout Accuracy = 0.6182669789227166
+Hyperparameters:
+    max_depth: 18
+    random_state: 42
+    min_samples_split: 7
+    min_samples_leaf: 6
+    bootstrap: True
+    warm_start: True
+    min_weight_fraction_leaf: 0.03056837130811274
+    n_estimators: 309
+    criterion: entropy
+Number of features: 13
+Chosen Features:
+     loan_term
+     loan_amount
+     lux_times_res
+     self_employed_ Yes
+     luxury_assets_value
+     col_times_term
+     total_collateral
+     no_of_dependents_4
+     no_of_dependents_3
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
 Best F1 so far: 0.7745664739884393
 Accuracy = 0.6346604215456675
 Holdout F1 Score: 0.7663280116110306
@@ -63,3 +93,166 @@ Chosen Features:
      loan_income_ratio
      commercial_assets_value
      bank_asset_value
+
+Best F1 so far: 0.7746170678336981
+Accuracy = 0.6381733021077284
+Holdout F1 Score: 0.7580174927113704
+Holdout Accuracy = 0.6112412177985949
+Hyperparameters:
+    max_depth: 22
+    random_state: 42
+    min_samples_split: 3
+    min_samples_leaf: 7
+    bootstrap: True
+    warm_start: False
+    min_weight_fraction_leaf: 0.024846456295608534
+    n_estimators: 301
+    criterion: log_loss
+Number of features: 17
+Chosen Features:
+     self_employed_ No
+     no_of_dependents_1
+     no_of_dependents_0
+     loan_amount
+     education_ Not Graduate
+     education_ Graduate
+     loan_term
+     total_collateral
+     term_times_income
+     lux_times_res
+     col_times_term
+     no_of_dependents_3
+     self_employed_ Yes
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+Best F1 so far: 0.7750362844702468
+Accuracy = 0.6370023419203747
+Holdout F1 Score: 0.7634252539912917
+Holdout Accuracy = 0.6182669789227166
+Hyperparameters:
+    max_depth: 20
+    random_state: 42
+    min_samples_split: 6
+    min_samples_leaf: 4
+    bootstrap: True
+    warm_start: False
+    min_weight_fraction_leaf: 0.02088228210584552
+    n_estimators: 170
+    criterion: entropy
+Number of features: 17
+Chosen Features:
+     self_employed_ Yes
+     loan_term
+     no_of_dependents_2
+     loan_amount
+     income_annum
+     no_of_dependents_1
+     education_ Graduate
+     self_employed_ No
+     term_times_income
+     no_of_dependents_4
+     no_of_dependents_5
+     education_ Not Graduate
+     total_collateral
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+     
+Best F1 so far: 0.7751265365148229
+Accuracy = 0.6358313817330211
+Holdout F1 Score: 0.7663280116110306
+Holdout Accuracy = 0.6229508196721312
+Hyperparameters:
+    max_depth: 30
+    random_state: 42
+    min_samples_split: 5
+    min_samples_leaf: 5
+    bootstrap: False
+    warm_start: False
+    min_weight_fraction_leaf: 0.036007144802615465
+    n_estimators: 149
+    criterion: gini
+Number of features: 9
+Chosen Features:
+     self_employed_ No
+     luxury_assets_value
+     loan_term
+     total_collateral
+     education_ Not Graduate
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+Best F1 so far: 0.774800868935554
+Accuracy = 0.6358313817330211
+Holdout F1 Score: 0.7634252539912917
+Holdout Accuracy = 0.6182669789227166
+Hyperparameters:
+    max_depth: 16
+    random_state: 42
+    min_samples_split: 4
+    min_samples_leaf: 4
+    bootstrap: True
+    warm_start: True
+    min_weight_fraction_leaf: 0.02952639161508948
+    n_estimators: 425
+    criterion: log_loss
+Number of features: 17
+Chosen Features:
+     income_annum
+     loan_term
+     term_times_income
+     residential_assets_value
+     no_of_dependents_0
+     education_ Not Graduate
+     luxury_assets_value
+     self_employed_ No
+     lux_times_res
+     loan_amount
+     no_of_dependents_3
+     no_of_dependents_4
+     no_of_dependents_5
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+
+Best F1 so far: 0.7759245830311821
+Accuracy = 0.6381733021077284
+Holdout F1 Score: 0.7652173913043477
+Holdout Accuracy = 0.6206088992974239
+Hyperparameters:
+    max_depth: 26
+    random_state: 42
+    min_samples_split: 4
+    min_samples_leaf: 4
+    bootstrap: True
+    warm_start: False
+    min_weight_fraction_leaf: 0.02936400746539998
+    n_estimators: 284
+    criterion: log_loss
+Number of features: 17
+Chosen Features:
+     no_of_dependents_5
+     lux_times_res
+     education_ Not Graduate
+     income_annum
+     self_employed_ No
+     loan_term
+     luxury_assets_value
+     total_collateral
+     col_times_term
+     self_employed_ Yes
+     loan_amount
+     no_of_dependents_0
+     no_of_dependents_1
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+

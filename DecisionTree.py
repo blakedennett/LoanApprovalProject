@@ -26,7 +26,7 @@ def vanilla_tree():
     print("Holdout Accuracy:", accuracy_score(holdout_true, holdout_pred))
 
 
-vanilla_tree()
+# vanilla_tree()
 
 
 sure_features = [' loan_coll_ratio', ' loan_income_ratio', ' commercial_assets_value', ' bank_asset_value']
@@ -89,12 +89,12 @@ def decision_tree(best_so_far=0.64):
 
         n_features, chosen_features = get_features(holdout)
 
-        max_depth = random.randint(4, 32)                           # 4 to 32 levels
-        min_samples_split = random.randint(5, 15)                   # 2 to 15 samples
-        min_samples_leaf = random.randint(1, 8)                    # 1 to 15 samples
+        max_depth = random.randint(4, 30)                           # 4 to 32 levels
+        min_samples_split = random.randint(8, 15)                   # 2 to 15 samples
+        min_samples_leaf = random.randint(2, 7)                    # 1 to 15 samples
         criterion = random.choice(["gini", "entropy", "log_loss"])  # gini, entropy, log_loss
         class_weight = random.choice(["balanced", None])            # balanced, None
-        max_leaf_nodes = random.randint(30, 80)                     # 20 to 80 nodes
+        max_leaf_nodes = random.randint(35, 85)                     # 20 to 80 nodes
         min_impurity_decrease = random.uniform(0, 0.05)              # 0 to 0.1
         min_weight_fraction_leaf = random.uniform(0, 0.05)           # 0 to 0.1
 
@@ -118,13 +118,14 @@ def decision_tree(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            best_so_far = f1
+            # best_so_far = f1
 
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
             record_results(f1, val_acc, holdout_f1, holdout_acc, hyperparameters, n_features, chosen_features, "DecisionTree")
 
             winsound.Beep(350, 600)
+            print('Decision Tree')
 
 
 
@@ -140,13 +141,13 @@ def xgb(best_so_far=0.64):
         n_features, chosen_features = get_features(holdout)
 
 
-        max_depth = random.randint(4, 25)                           # 4 to 32 levels
+        max_depth = random.randint(4, 18)                           # 4 to 32 levels
         learning_rate = random.uniform(0, 0.1)                      # 0 to 0.1
         min_split_loss = random.randint(0, 12)                      # 0 to 20
-        min_child_weight = random.randint(0, 18)                    # 0 to 20
+        min_child_weight = random.randint(1, 12)                    # 0 to 20
         subsample = random.uniform(0.1, 1)                          # 0.1 to 1
-        reg_lambda = random.randint(1, 5)                           # 1 to 5
-        reg_alpha = random.randint(1, 4)                            # 1 to 5
+        reg_lambda = random.randint(2, 7)                           # 1 to 5
+        reg_alpha = random.randint(1, 3)                            # 1 to 5
         
 
         hyperparameters = {
@@ -165,13 +166,14 @@ def xgb(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            best_so_far = f1
+            # best_so_far = f1
             
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
             record_results(f1, val_acc, holdout_f1, holdout_acc, hyperparameters, n_features, chosen_features, "XGB")
 
             winsound.Beep(800, 600)
+            print('XGB')
 
 
 
@@ -192,13 +194,14 @@ def gaussian_nb(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            best_so_far = f1
+            # best_so_far = f1
             
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
             record_results(f1, val_acc, holdout_f1, holdout_acc, None, n_features, chosen_features, "GaussianNB")
 
             winsound.Beep(350, 1800)
+            print('GaussianNB')
 
 
 
@@ -214,13 +217,13 @@ def random_forest(best_so_far=0.64):
         n_features, chosen_features = get_features(holdout)
 
 
-        max_depth = random.randint(4, 32)                           # 4 to 32 levels
+        max_depth = random.randint(8, 32)                           # 4 to 32 levels
         warm_start = random.choice([True, False, False, False, False])
-        min_samples_split = random.randint(2, 8)                    # 2 to 8
-        min_samples_leaf = random.randint(1, 5)                     # 0 to 5
-        min_weight_fraction_leaf = random.uniform(0, 0.5)           # 0 to 0.5
+        min_samples_split = random.randint(3, 8)                    # 2 to 8
+        min_samples_leaf = random.randint(3, 7)                     # 0 to 5
+        min_weight_fraction_leaf = random.uniform(0, 0.1)           # 0 to 0.5
         bootstrap = random.choice([True, True, True, True, False])                          
-        n_estimators = random.randint(10, 500)                      # 10 to 500
+        n_estimators = random.randint(75, 500)                      # 10 to 500
         criterion = random.choice(['gini', 'entropy', 'log_loss'])   
 
         
@@ -242,13 +245,14 @@ def random_forest(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            best_so_far = f1
+            # best_so_far = f1
 
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
             record_results(f1, val_acc, holdout_f1, holdout_acc, hyperparameters, n_features, chosen_features, "RandomForest")
 
             winsound.Beep(800, 1800)
+            print('RandomForest')
 
 
 
@@ -266,7 +270,7 @@ def k_neighbors(best_so_far=0.64):
 
 
         weights = random.choice(['uniform', 'uniform', 'uniform', 'uniform', 'distance'])
-        n_neighbors = random.randint(4, 30)           # 4 to 30 
+        n_neighbors = random.randint(16, 32)           # 4 to 30 
         p = random.randint(1, 2)                      # 1 to 2
         algorithm = random.choice(['auto', 'auto', 'auto', 'auto', 'ball_tree', 'kd_tree', 'brute'])   
 
@@ -293,6 +297,7 @@ def k_neighbors(best_so_far=0.64):
             winsound.Beep(350, 200)
             winsound.Beep(350, 200)
             winsound.Beep(350, 200)
+            print('KNeighbors')
 
 
 
@@ -305,8 +310,8 @@ def k_neighbors(best_so_far=0.64):
 #     p1 = mp.Process(target=decision_tree, args=(0.7717782577393809,))
 #     p2 = mp.Process(target=xgb, args=(0.7748008689,))
 #     p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
-#     p4 = mp.Process(target=random_forest, args=(0.7745664739884393,))
-#     p5 = mp.Process(target=k_neighbors, args=(0.7536679536679537,))
+#     p4 = mp.Process(target=random_forest, args=(0.7751265365148229,))
+#     p5 = mp.Process(target=k_neighbors, args=(0.7586726998491703,))
 
 #     p1.start()
 #     p2.start()
@@ -319,3 +324,24 @@ def k_neighbors(best_so_far=0.64):
 #     p3.join()
 #     p4.join()
 #     p5.join()
+
+
+if __name__ == '__main__':
+
+    p1 = mp.Process(target=decision_tree, args=(0.7717782577394,))
+    p2 = mp.Process(target=xgb, args=(0.772,))
+    p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
+    p4 = mp.Process(target=random_forest, args=(0.7748,))
+    p5 = mp.Process(target=k_neighbors, args=(0.7586726998491703,))
+
+    p1.start()
+    p2.start()
+    p3.start()
+    p4.start()
+    p5.start()
+
+    p1.join()
+    p2.join()
+    p3.join()
+    p4.join()
+    p5.join()

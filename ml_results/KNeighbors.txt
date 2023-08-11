@@ -59,3 +59,70 @@ Chosen Features:
      loan_income_ratio
      commercial_assets_value
      bank_asset_value
+
+Best F1 so far: 0.7578947368421052
+Accuracy = 0.6229508196721312
+Holdout F1 Score: 0.7333333333333334
+Holdout Accuracy = 0.5878220140515222
+Hyperparameters:
+    weights: uniform
+    n_neighbors: 29
+    p: 2
+    algorithm: brute
+Number of features: 11
+Chosen Features:
+     self_employed_ No
+     luxury_assets_value
+     no_of_dependents_4
+     no_of_dependents_3
+     no_of_dependents_1
+     loan_term
+     no_of_dependents_0
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+
+Best F1 so far: 0.7586726998491703
+Accuracy = 0.6252927400468384
+Holdout F1 Score: 0.7408536585365854
+Holdout Accuracy = 0.6018735362997658
+Hyperparameters:
+    weights: uniform
+    n_neighbors: 29
+    p: 1
+    algorithm: auto
+Number of features: 9
+Chosen Features:
+     no_of_dependents_5
+     income_annum
+     loan_term
+     luxury_assets_value
+     no_of_dependents_1
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+
+Best F1 so far: 0.7606060606060606
+Accuracy = 0.629976580796253
+Holdout F1 Score: 0.7431192660550459
+Holdout Accuracy = 0.6065573770491803
+Hyperparameters:
+    weights: uniform
+    n_neighbors: 25
+    p: 1
+    algorithm: auto
+Number of features: 8
+Chosen Features:
+     income_annum
+     self_employed_ No
+     no_of_dependents_1
+     luxury_assets_value
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+

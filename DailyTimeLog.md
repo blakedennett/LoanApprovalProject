@@ -88,6 +88,14 @@
 ### Day 16
 * Random Forest Classifier
 * Parameter adjusments
-*
-*
+* KNeighbors Classifier
 
+### Day 17
+* Getting 5 top results per file
+* adjusted parameters
+* got one model on finaltree file
+
+### Day 18
+---------------------------------------------- future notes ----------------------------------------------
+* clean up results
+* add another function

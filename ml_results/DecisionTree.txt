@@ -35,38 +35,4 @@ Chosen Features:
      commercial_assets_value
      bank_asset_value
 
-Best F1 so far: 0.7717782577393809
-Accuracy = 0.6288056206088993
-Holdout F1 Score: 0.7652173913043477
-Holdout Accuracy = 0.6206088992974239
-Hyperparameters:
-    max_depth: 27
-    min_samples_split: 13
-    min_samples_leaf: 5
-    max_features: None
-    criterion: log_loss
-    random_state: 42
-    class_weight: None
-    splitter: best
-    max_leaf_nodes: 43
-    min_impurity_decrease: 0.004502991429378322
-    min_weight_fraction_leaf: 0.005695146497927739
-Number of features: 17
-Chosen Features:
-     luxury_assets_value
-     term_times_income
-     loan_amount
-     no_of_dependents_2
-     loan_term
-     no_of_dependents_0
-     lux_times_res
-     education_ Graduate
-     income_annum
-     education_ Not Graduate
-     no_of_dependents_4
-     no_of_dependents_5
-     self_employed_ Yes
-     loan_coll_ratio
-     loan_income_ratio
-     commercial_assets_value
-     bank_asset_value
+

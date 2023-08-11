@@ -21,4 +21,3 @@ Chosen Features:
      loan_income_ratio
      commercial_assets_value
      bank_asset_value
-

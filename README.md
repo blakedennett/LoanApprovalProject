@@ -223,7 +223,7 @@
 
 * <a href="./preprocessing.py">Preprocessing File<a>
 
-<h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features. Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 four way training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
+<h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features. Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 four-way training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
 
 #### Feature Importance
 
@@ -237,27 +237,33 @@
 
 ## Decision Tree
 
+* <a href="./DecisionTree.py">Machine Learning File<a>
+
 #### Metrics
 
 <h4>Ultimately, the f1 score will be my number one metric in evaluating and selecting my model. This is because I want to take both precision (taking into account false positives) and recall (looking at false negatives) into account. I feel that the bank would like a model that doesn't necessarily take neither missing great loans nor approving poor loans as a higher priority. Therefore, I chose the f1 score which is the harmonic mean of precision and recall. I also chose accuracy as a secondary metric, because it works fine as a more general metric to look at.</h4>
 
 #### Vanilla Tree
 
-<h4>One way I decided to measure my progress was through making a vanilla tree. I used the decision tree classifier from sklearn and didn't add any hyperparameters nor did I remove any features hindering its performance. Therefore, my baseline accuracy and f1 score were 0.57 and 0.66, respectively.</h4>
+<h4>One way I decided to measure my progress was through making a vanilla tree. I used the decision tree classifier from Sklearn and didn't add any hyperparameters nor did I remove any features hindering its performance. Therefore, my baseline accuracy and f1 score were 0.57 and 0.66, respectively.</h4>
 
-#### Model Selection Methododology
+#### Model Selection Methodology
 
-<h4>For my model selection, I used a while loop that randomly selected the number of features and which to use as well as randomly selecting each hyperparameter. If an f1 score was found that was higher than any previous, the program would append to a text file, saving each hyperparameter with its validation and holdout scores. I made four of these while loops inside of separate functions that ran different types of decision trees. These were the GausianNB, XGBClassifier, RandomForest, and the plain DecisionTreeClassifier. I put these loops into four separate functions and ran them each in parrellel using the Python multiprocessing library. The best models were selected using the validation data, but ultimately, the holdout data is the one I used as the final results. I decided not to use any automatic hyperparameter tools like GridSearchCV and Ray Tune because I wanted to be more hands-on with the models.</h4>
+<h4>For my model selection, I used a while loop that randomly selected the number of features and which to use as well as randomly selecting each hyperparameter. If an f1 score was found that was higher than any previous, the program would append to a text file, saving each hyperparameter with its validation and holdout scores. I made four of these while loops inside of separate functions that ran different types of decision trees. These were the GausianNB, XGBClassifier, RandomForest, and the plain DecisionTreeClassifier. I put these loops into four separate functions and ran them each in parallel using the Python multiprocessing library. The best models were selected using the validation data, but ultimately, the holdout data is the one I used as the final results. I decided not to use any automatic hyperparameter tools like GridSearchCV and Ray Tune because I wanted to be more hands-on with the models.</h4>
 
 #### Final Model Results
 
 
-|                   |Vanilla|DecisionTree|XGBoost|GaussianNB|RandomForset|KNeighbors|
-|-------------------|-------|------------|-------|----------|------------|----------|
-|Validation F1      |64.48  |77.18       |77.40  |77.22     |77.46       |75.37     |
-|Holdout F1         |63.74  |76.52       |76.86  |76.05     |**77.63**       |74.12     |
-|Validation Accuracy|55.62  |62.88       |63.58  |63.11     |63.47       |62.65     |
-|Holdout Accuracy   |55.50  |58.78       |**62.76**  |61.36     |62.30       |60.42     |
+|                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
+|-------------------|-------|------------|--------------|----------|------------|----------|
+|Validation F1      |64.48  |77.18       |77.40         |77.22     |77.51       |75.87     |
+|Holdout F1         |63.74  |76.52       |76.86         |76.05     |**77.66**   |77.09     |
+|Validation Accuracy|55.62  |62.88       |63.58         |63.11     |63.58       |62.53     |
+|Holdout Accuracy   |55.50  |58.78       |**62.76**     |61.36     |62.30       |60.19     |
+
+<h4>After running hours upon hours of different randomly created trees, these are the results. I am prioritizing the holdout results because I made my model selection completely based on the validation data and don't want to have biased results. Although the best holdout accuracy comes from the extreme gradient boosting model, my chosen model is the Random Forest because it has the best f1 score. (See metrics section above.) After removing the Cibil score due to the results being too easy, getting my results up was harder than I anticipated. I'm hoping that the Neural Network will perform much better.</h4>
+
+
 
 ## Neural Network
 
