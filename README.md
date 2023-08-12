@@ -253,13 +253,22 @@
 
 #### Final Model Results
 
+<h4>Without Cibil Score</h4>
 
 |                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|-------|------------|--------------|----------|------------|----------|
-|Validation F1      |64.48  |77.18       |77.40         |77.22     |77.51       |75.87     |
-|Holdout F1         |63.74  |76.52       |76.86         |76.05     |**77.66**   |77.09     |
-|Validation Accuracy|55.62  |62.88       |63.58         |63.11     |63.58       |62.53     |
-|Holdout Accuracy   |55.50  |58.78       |**62.76**     |61.36     |62.30       |60.19     |
+|Validation F1      |64.48  |77.18       |77.48         |77.22     |77.59       |76.36     |
+|Holdout F1         |63.74  |76.52       |**76.86**     |76.05     |76.52       |74.74     |
+|Validation Accuracy|55.62  |62.88       |63.58         |63.11     |63.82       |62.88     |
+|Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |62.06       |60.42     |
+
+<h4>With Cibil Score</h4>
+
+|                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
+|-------------------|-------|------------|--------------|----------|------------|----------|
+|Holdout F1         |63.74  |76.52       |**76.86**     |76.05     |76.52       |74.74     |
+|Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |62.06       |60.42     |
+
 
 <h4>After running hours upon hours of different randomly created trees, these are the results. I am prioritizing the holdout results because I made my model selection completely based on the validation data and don't want to have biased results. Although the best holdout accuracy comes from the extreme gradient boosting model, my chosen model is the Random Forest because it has the best f1 score. (See metrics section above.) After removing the Cibil score due to the results being too easy, getting my results up was harder than I anticipated. I'm hoping that the Neural Network will perform much better.</h4>
 

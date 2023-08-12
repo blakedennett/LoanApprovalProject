@@ -118,7 +118,7 @@ def decision_tree(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            # best_so_far = f1
+            best_so_far = f1
 
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
@@ -166,7 +166,7 @@ def xgb(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            # best_so_far = f1
+            best_so_far = f1
             
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
@@ -194,7 +194,7 @@ def gaussian_nb(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            # best_so_far = f1
+            best_so_far = f1
             
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
@@ -245,7 +245,7 @@ def random_forest(best_so_far=0.64):
         y_pred = model.predict(x_test[chosen_features])
         f1 = f1_score(y_test, y_pred)
         if f1 > best_so_far:
-            # best_so_far = f1
+            best_so_far = f1
 
             val_acc, holdout_f1, holdout_acc = get_results(holdout, model, chosen_features, y_test, y_pred)
 
@@ -310,8 +310,8 @@ def k_neighbors(best_so_far=0.64):
 #     p1 = mp.Process(target=decision_tree, args=(0.7717782577393809,))
 #     p2 = mp.Process(target=xgb, args=(0.7748008689,))
 #     p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
-#     p4 = mp.Process(target=random_forest, args=(0.7751265365148229,))
-#     p5 = mp.Process(target=k_neighbors, args=(0.7586726998491703,))
+#     p4 = mp.Process(target=random_forest, args=(0.7759245830311821,))
+#     p5 = mp.Process(target=k_neighbors, args=(0.7636092468307233,))
 
 #     p1.start()
 #     p2.start()
@@ -328,11 +328,11 @@ def k_neighbors(best_so_far=0.64):
 
 if __name__ == '__main__':
 
-    p1 = mp.Process(target=decision_tree, args=(0.7717782577394,))
+    p1 = mp.Process(target=decision_tree, args=(0.771778,))
     p2 = mp.Process(target=xgb, args=(0.772,))
     p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
-    p4 = mp.Process(target=random_forest, args=(0.7748,))
-    p5 = mp.Process(target=k_neighbors, args=(0.7586726998491703,))
+    p4 = mp.Process(target=random_forest, args=(0.7759245830311821,))
+    p5 = mp.Process(target=k_neighbors, args=(0.7636092468307233,))
 
     p1.start()
     p2.start()

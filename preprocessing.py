@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 
-def get_preprocessed_df():
+def get_preprocessed_df(with_cibil=False):
 
     df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dataset.csv')
 
@@ -51,7 +51,8 @@ def get_preprocessed_df():
     df[' loan_status'] = np.where(df[' loan_status'] == " Approved", 1, 0)
 
     df.drop(columns=['loan_id'], inplace=True)
-    df.drop(columns=[' cibil_score'], inplace=True)
+    if not with_cibil:
+        df.drop(columns=[' cibil_score'], inplace=True)
 
     df = pd.get_dummies(df)
 
@@ -88,4 +89,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
