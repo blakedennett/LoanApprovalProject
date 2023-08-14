@@ -89,28 +89,18 @@ def decision_tree(best_so_far=0.64):
 
         n_features, chosen_features = get_features(holdout)
 
-        max_depth = random.randint(4, 30)                           # 4 to 32 levels
-        min_samples_split = random.randint(8, 15)                   # 2 to 15 samples
-        min_samples_leaf = random.randint(2, 7)                    # 1 to 15 samples
-        criterion = random.choice(["gini", "entropy", "log_loss"])  # gini, entropy, log_loss
-        class_weight = random.choice(["balanced", None])            # balanced, None
-        max_leaf_nodes = random.randint(35, 85)                     # 20 to 80 nodes
-        min_impurity_decrease = random.uniform(0, 0.05)              # 0 to 0.1
-        min_weight_fraction_leaf = random.uniform(0, 0.05)           # 0 to 0.1
-
-
         hyperparameters = {
-            "max_depth": max_depth,
-            "min_samples_split": min_samples_split,
-            "min_samples_leaf": min_samples_leaf,
+            "max_depth": random.randint(4, 30),                           # 4 to 32 levels
+            "min_samples_split": random.randint(8, 15),                   # 2 to 15 samples
+            "min_samples_leaf": random.randint(2, 7),                    # 1 to 15 samples
             "max_features": None,
-            "criterion": criterion,
+            "criterion": random.choice(["gini", "entropy", "log_loss"]),
             "random_state": 42,
-            "class_weight": class_weight,
+            "class_weight": random.choice(["balanced", None]),            # balanced, None
             "splitter": "best",
-            "max_leaf_nodes": max_leaf_nodes,
-            "min_impurity_decrease": min_impurity_decrease,
-            "min_weight_fraction_leaf": min_weight_fraction_leaf,
+            "max_leaf_nodes": random.randint(35, 85),                     # 20 to 80 nodes
+            "min_impurity_decrease": random.uniform(0, 0.05),              # 0 to 0.1
+            "min_weight_fraction_leaf": random.uniform(0, 0.05)           # 0 to 0.1
         }
 
         model = DecisionTreeClassifier(**hyperparameters)
@@ -138,27 +128,17 @@ def xgb(best_so_far=0.64):
 
         x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
 
-        n_features, chosen_features = get_features(holdout)
-
-
-        max_depth = random.randint(4, 18)                           # 4 to 32 levels
-        learning_rate = random.uniform(0, 0.1)                      # 0 to 0.1
-        min_split_loss = random.randint(0, 12)                      # 0 to 20
-        min_child_weight = random.randint(1, 12)                    # 0 to 20
-        subsample = random.uniform(0.1, 1)                          # 0.1 to 1
-        reg_lambda = random.randint(2, 7)                           # 1 to 5
-        reg_alpha = random.randint(1, 3)                            # 1 to 5
-        
+        n_features, chosen_features = get_features(holdout)        
 
         hyperparameters = {
-            "max_depth": max_depth,
+            "max_depth": random.randint(4, 18),                 # 4 to 32 levels
             "random_state": 42,
-            "min_split_loss": min_split_loss,
-            "min_child_weight": min_child_weight,
-            "subsample": subsample,
-            "reg_lambda": reg_lambda,
-            "reg_alpha": reg_alpha,
-            "learning_rate": learning_rate
+            "min_split_loss": random.randint(0, 12),            # 0 to 12
+            "min_child_weight": random.randint(1, 12),          # 1 to 12
+            "subsample": random.uniform(0.1, 1),                # 0.1 to 1
+            "reg_lambda": random.randint(2, 7),                 # 2 to 7
+            "reg_alpha": random.randint(1, 3),                  # 1 to 3
+            "learning_rate": random.uniform(0, 0.1)             # 0 to 0.1
         }
 
         model = XGBClassifier(**hyperparameters)
@@ -214,30 +194,18 @@ def random_forest(best_so_far=0.64):
 
         x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
 
-        n_features, chosen_features = get_features(holdout)
-
-
-        max_depth = random.randint(8, 32)                           # 4 to 32 levels
-        warm_start = random.choice([True, False, False, False, False])
-        min_samples_split = random.randint(3, 8)                    # 2 to 8
-        min_samples_leaf = random.randint(3, 7)                     # 0 to 5
-        min_weight_fraction_leaf = random.uniform(0, 0.1)           # 0 to 0.5
-        bootstrap = random.choice([True, True, True, True, False])                          
-        n_estimators = random.randint(75, 500)                      # 10 to 500
-        criterion = random.choice(['gini', 'entropy', 'log_loss'])   
-
-        
+        n_features, chosen_features = get_features(holdout)      
 
         hyperparameters = {
-            "max_depth": max_depth,
+            "max_depth": random.randint(8, 32),                     # 4 to 32 levels
             "random_state": 42,
-            "min_samples_split": min_samples_split,
-            "min_samples_leaf": min_samples_leaf,
-            "bootstrap": bootstrap,
-            "warm_start": warm_start,
-            "min_weight_fraction_leaf": min_weight_fraction_leaf,
-            "n_estimators": n_estimators,
-            'criterion': criterion
+            "min_samples_split": random.randint(3, 8),              # 2 to 8
+            "min_samples_leaf": random.randint(3, 7),               # 0 to 5
+            "bootstrap": random.choice([True, True, True, True, False]),
+            "warm_start": random.choice([True, False, False, False, False]),
+            "min_weight_fraction_leaf": random.uniform(0, 0.1),     # 0 to 0.5
+            "n_estimators": random.randint(75, 500),                # 10 to 500
+            'criterion': random.choice(['gini', 'entropy', 'log_loss'])
         }
 
         model = RandomForestClassifier(**hyperparameters)
@@ -266,21 +234,13 @@ def k_neighbors(best_so_far=0.64):
 
         x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
 
-        n_features, chosen_features = get_features(holdout)
-
-
-        weights = random.choice(['uniform', 'uniform', 'uniform', 'uniform', 'distance'])
-        n_neighbors = random.randint(16, 32)           # 4 to 30 
-        p = random.randint(1, 2)                      # 1 to 2
-        algorithm = random.choice(['auto', 'auto', 'auto', 'auto', 'ball_tree', 'kd_tree', 'brute'])   
-
-        
+        n_features, chosen_features = get_features(holdout)          
 
         hyperparameters = {
-            "weights": weights,
-            "n_neighbors": n_neighbors,
-            "p": p,
-            "algorithm": algorithm,
+            "weights": random.choice(['uniform', 'uniform', 'uniform', 'uniform', 'distance']),
+            "n_neighbors": random.randint(16, 32),        # 4 to 30
+            "p": random.randint(1, 2),                    # 1 to 2
+            "algorithm": random.choice(['auto', 'auto', 'auto', 'auto', 'ball_tree', 'kd_tree', 'brute'])
         }
 
         model = KNeighborsClassifier(**hyperparameters)
@@ -328,7 +288,7 @@ def k_neighbors(best_so_far=0.64):
 
 if __name__ == '__main__':
 
-    p1 = mp.Process(target=decision_tree, args=(0.771778,))
+    p1 = mp.Process(target=decision_tree, args=(0.7717782577393809,))
     p2 = mp.Process(target=xgb, args=(0.772,))
     p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
     p4 = mp.Process(target=random_forest, args=(0.7759245830311821,))

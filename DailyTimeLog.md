@@ -96,8 +96,15 @@
 * got one model on finaltree file
 
 ### Day 18
----------------------------------------------- future notes ----------------------------------------------
 * clean up results
-* add another function
 * update table and final tree files
 * collapse features to be shorter
+
+### Day 19
+* 
+*
+*
+*
+
+
+---------------------------------------------- future notes ----------------------------------------------

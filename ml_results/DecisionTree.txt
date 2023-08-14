@@ -131,3 +131,32 @@ Chosen Features:
      commercial_assets_value
      bank_asset_value
 
+
+Best F1 so far: 0.7717782577393809
+Accuracy = 0.6288056206088993
+Holdout F1 Score: 0.7652173913043477
+Holdout Accuracy = 0.6206088992974239
+Hyperparameters:
+    max_depth: 14
+    min_samples_split: 9
+    min_samples_leaf: 4
+    max_features: None
+    criterion: entropy
+    random_state: 42
+    class_weight: None
+    splitter: best
+    max_leaf_nodes: 82
+    min_impurity_decrease: 0.005024365757295557
+    min_weight_fraction_leaf: 0.01079802772773465
+Number of features: 9
+Chosen Features:
+     lux_times_res
+     self_employed_ Yes
+     no_of_dependents_2
+     no_of_dependents_0
+     no_of_dependents_1
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+

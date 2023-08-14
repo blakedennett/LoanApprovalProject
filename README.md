@@ -249,7 +249,9 @@
 
 #### Model Selection Methodology
 
-<h4>For my model selection, I used a while loop that randomly selected the number of features and which to use as well as randomly selecting each hyperparameter. If an f1 score was found that was higher than any previous, the program would append to a text file, saving each hyperparameter with its validation and holdout scores. I made four of these while loops inside of separate functions that ran different types of decision trees. These were the GausianNB, XGBClassifier, RandomForest, and the plain DecisionTreeClassifier. I put these loops into four separate functions and ran them each in parallel using the Python multiprocessing library. The best models were selected using the validation data, but ultimately, the holdout data is the one I used as the final results. I decided not to use any automatic hyperparameter tools like GridSearchCV and Ray Tune because I wanted to be more hands-on with the models.</h4>
+<h4>For my model selection, I used a while loop that randomly selected the number of features and which to use as well as randomly selecting each hyperparameter. If an f1 score was found that was higher than any previous, the program would append to a text file, saving each hyperparameter with its validation and holdout scores. I made four of these while loops inside of separate functions that ran different types of decision trees. These were the GausianNB, XGBClassifier, RandomForest, and the plain DecisionTreeClassifier. I put these loops into four separate functions and ran them each in parallel using the Python multiprocessing library. The best models were selected using the validation data, but ultimately, the holdout data is the one I used as the final results.</h4>
+
+#### Using GridSearchCv
 
 #### Final Model Results
 
@@ -266,8 +268,8 @@
 
 |                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|-------|------------|--------------|----------|------------|----------|
-|Holdout F1         |63.74  |76.52       |**76.86**     |76.05     |76.52       |74.74     |
-|Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |62.06       |60.42     |
+|Holdout F1         |63.74  |76.52       |**76.86**     |76.05     |99.62       |74.74     |
+|Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |99.53       |60.42     |
 
 
 <h4>After running hours upon hours of different randomly created trees, these are the results. I am prioritizing the holdout results because I made my model selection completely based on the validation data and don't want to have biased results. Although the best holdout accuracy comes from the extreme gradient boosting model, my chosen model is the Random Forest because it has the best f1 score. (See metrics section above.) After removing the Cibil score due to the results being too easy, getting my results up was harder than I anticipated. I'm hoping that the Neural Network will perform much better.</h4>
