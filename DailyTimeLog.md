@@ -101,7 +101,13 @@
 * collapse features to be shorter
 
 ### Day 19
-* 
+* GridSearchCV
+* Parameter tuning
+* added table for results
+
+
+### Day 20
+*
 *
 *
 *

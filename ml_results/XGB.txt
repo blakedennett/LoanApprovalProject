@@ -1,3 +1,26 @@
+Best F1 so far: 0.7734487734487735
+Accuracy = 0.6323185011709602
+Holdout F1 Score: 0.7663280116110306
+Holdout Accuracy = 0.6229508196721312
+Hyperparameters:
+    max_depth: 4
+    random_state: 42
+    min_split_loss: 3
+    min_child_weight: 3
+    subsample: 0.19723144337344134
+    reg_lambda: 4
+    reg_alpha: 2
+    learning_rate: 0.015874729304823056
+Number of features: 6
+Chosen Features:
+     col_times_term
+     term_times_income
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+
 Best F1 so far: 0.7736263736263735
 Accuracy = 0.6381733021077284
 Holdout F1 Score: 0.763582966226138
@@ -47,3 +70,7 @@ Chosen Features:
      loan_income_ratio
      commercial_assets_value
      bank_asset_value
+
+
+
+

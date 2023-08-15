@@ -9,6 +9,9 @@ import multiprocessing as mp
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
+# import learning rate scheduler for xgboost
+
+
 
 
 
@@ -92,15 +95,15 @@ def decision_tree(best_so_far=0.64):
         hyperparameters = {
             "max_depth": random.randint(4, 30),                           # 4 to 32 levels
             "min_samples_split": random.randint(8, 15),                   # 2 to 15 samples
-            "min_samples_leaf": random.randint(2, 7),                    # 1 to 15 samples
+            "min_samples_leaf": random.randint(2, 5),                    # 1 to 15 samples
             "max_features": None,
-            "criterion": random.choice(["gini", "entropy", "log_loss"]),
+            "criterion": random.choice(["entropy", "log_loss"]),  # gini, entropy, log_loss
             "random_state": 42,
-            "class_weight": random.choice(["balanced", None]),            # balanced, None
+            "class_weight": random.choice([None]),            # balanced, None
             "splitter": "best",
-            "max_leaf_nodes": random.randint(35, 85),                     # 20 to 80 nodes
-            "min_impurity_decrease": random.uniform(0, 0.05),              # 0 to 0.1
-            "min_weight_fraction_leaf": random.uniform(0, 0.05)           # 0 to 0.1
+            "max_leaf_nodes": random.randint(37, 90),                     # 20 to 80 nodes
+            "min_impurity_decrease": random.uniform(0, 0.006),              # 0 to 0.1
+            "min_weight_fraction_leaf": random.uniform(0, 0.01)           # 0 to 0.1
         }
 
         model = DecisionTreeClassifier(**hyperparameters)
@@ -128,17 +131,17 @@ def xgb(best_so_far=0.64):
 
         x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
 
-        n_features, chosen_features = get_features(holdout)        
+        n_features, chosen_features = get_features(holdout)  
 
         hyperparameters = {
-            "max_depth": random.randint(4, 18),                 # 4 to 32 levels
+            "max_depth": random.randint(4, 15),                 # 4 to 32 levels
             "random_state": 42,
-            "min_split_loss": random.randint(0, 12),            # 0 to 12
-            "min_child_weight": random.randint(1, 12),          # 1 to 12
+            "min_split_loss": random.randint(2, 9),            # 0 to 12
+            "min_child_weight": random.randint(3, 12),          # 1 to 12
             "subsample": random.uniform(0.1, 1),                # 0.1 to 1
-            "reg_lambda": random.randint(2, 7),                 # 2 to 7
+            "reg_lambda": random.randint(3, 5),                 # 2 to 7
             "reg_alpha": random.randint(1, 3),                  # 1 to 3
-            "learning_rate": random.uniform(0, 0.1)             # 0 to 0.1
+            "learning_rate": random.uniform(0, 0.099)             # 0 to 0.1
         }
 
         model = XGBClassifier(**hyperparameters)
@@ -197,14 +200,14 @@ def random_forest(best_so_far=0.64):
         n_features, chosen_features = get_features(holdout)      
 
         hyperparameters = {
-            "max_depth": random.randint(8, 32),                     # 4 to 32 levels
+            "max_depth": random.randint(15, 32),                     # 4 to 32 levels
             "random_state": 42,
-            "min_samples_split": random.randint(3, 8),              # 2 to 8
-            "min_samples_leaf": random.randint(3, 7),               # 0 to 5
-            "bootstrap": random.choice([True, True, True, True, False]),
+            "min_samples_split": random.randint(4, 8),              # 2 to 8
+            "min_samples_leaf": random.randint(4, 5),               # 0 to 5
+            "bootstrap": random.choice([True, True, True, False]),
             "warm_start": random.choice([True, False, False, False, False]),
-            "min_weight_fraction_leaf": random.uniform(0, 0.1),     # 0 to 0.5
-            "n_estimators": random.randint(75, 500),                # 10 to 500
+            "min_weight_fraction_leaf": random.uniform(0, 0.037),     # 0 to 0.5
+            "n_estimators": random.randint(150, 450),                # 10 to 500
             'criterion': random.choice(['gini', 'entropy', 'log_loss'])
         }
 
@@ -238,8 +241,8 @@ def k_neighbors(best_so_far=0.64):
 
         hyperparameters = {
             "weights": random.choice(['uniform', 'uniform', 'uniform', 'uniform', 'distance']),
-            "n_neighbors": random.randint(16, 32),        # 4 to 30
-            "p": random.randint(1, 2),                    # 1 to 2
+            "n_neighbors": random.randint(22, 32),        # 4 to 30
+            "p": random.choice([1, 2, 2, 2, 2]),                    # 1 to 2
             "algorithm": random.choice(['auto', 'auto', 'auto', 'auto', 'ball_tree', 'kd_tree', 'brute'])
         }
 
@@ -270,7 +273,7 @@ def k_neighbors(best_so_far=0.64):
 #     p1 = mp.Process(target=decision_tree, args=(0.7717782577393809,))
 #     p2 = mp.Process(target=xgb, args=(0.7748008689,))
 #     p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
-#     p4 = mp.Process(target=random_forest, args=(0.7759245830311821,))
+#     p4 = mp.Process(target=random_forest, args=(0.7760758570386579,))
 #     p5 = mp.Process(target=k_neighbors, args=(0.7636092468307233,))
 
 #     p1.start()
@@ -291,7 +294,7 @@ if __name__ == '__main__':
     p1 = mp.Process(target=decision_tree, args=(0.7717782577393809,))
     p2 = mp.Process(target=xgb, args=(0.772,))
     p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
-    p4 = mp.Process(target=random_forest, args=(0.7759245830311821,))
+    p4 = mp.Process(target=random_forest, args=(0.7760758570386579,))
     p5 = mp.Process(target=k_neighbors, args=(0.7636092468307233,))
 
     p1.start()

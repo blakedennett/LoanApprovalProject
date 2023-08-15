@@ -259,10 +259,25 @@
 
 |                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|-------|------------|--------------|----------|------------|----------|
-|Validation F1      |64.48  |77.18       |77.48         |77.22     |77.59       |76.36     |
-|Holdout F1         |63.74  |76.52       |**76.86**     |76.05     |76.52       |74.74     |
-|Validation Accuracy|55.62  |62.88       |63.58         |63.11     |63.82       |62.88     |
-|Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |62.06       |60.42     |
+|Validation F1      |64.48  |77.18       |77.48         |77.22     |77.61       |76.36     |
+|Holdout F1         |63.74  |76.52       |**76.86**     |76.05     |75.91       |74.74     |
+|Validation Accuracy|55.62  |62.88       |63.58         |63.11     |64.05       |62.88     |
+|Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |61.36       |60.42     |
+
+<h4>After running hours upon hours of different randomly created trees, these are the results. I am prioritizing the holdout results because I made my model selection completely based on the validation data and don't want to have biased results. Although the best holdout accuracy comes from the extreme gradient boosting model, my chosen model is the Random Forest because it has the best f1 score. (See metrics section above.) After removing the Cibil score due to the results being too easy, getting my results up was harder than I anticipated. I'm hoping that the Neural Network will perform much better.</h4>
+
+
+<h4>GridSearchCV Results</h4>
+
+
+|                   |DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
+|-------------------|------------|--------------|----------|------------|----------|
+|Holdout F1 Score   |76.41       |**76.86**     |76.05     |99.62       |74.74     |
+
+
+<h4>Although I mostly used a hands-on approach, I also wanted to use GridSearchCV to get some exposure to it.</h4>
+
+
 
 <h4>With Cibil Score</h4>
 
@@ -272,8 +287,7 @@
 |Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |99.53       |60.42     |
 
 
-<h4>After running hours upon hours of different randomly created trees, these are the results. I am prioritizing the holdout results because I made my model selection completely based on the validation data and don't want to have biased results. Although the best holdout accuracy comes from the extreme gradient boosting model, my chosen model is the Random Forest because it has the best f1 score. (See metrics section above.) After removing the Cibil score due to the results being too easy, getting my results up was harder than I anticipated. I'm hoping that the Neural Network will perform much better.</h4>
-
+<h4>I was curious about how the models would have gone if I had added the Cibil Score feature. I originally removed it because the vanilla tree was already getting a near perfect score. Therefore, I decided to just put up the holdout results.</h4>
 
 
 ## Neural Network
