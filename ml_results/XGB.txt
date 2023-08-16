@@ -1,3 +1,56 @@
+Best F1 so far: 0.7723342939481268
+Accuracy = 0.629976580796253
+Holdout F1 Score: 0.7652173913043477
+Holdout Accuracy = 0.6206088992974239
+Hyperparameters:
+    max_depth: 10
+    random_state: 42
+    min_split_loss: 5
+    min_child_weight: 10
+    subsample: 0.5220488387566345
+    reg_lambda: 4
+    reg_alpha: 3
+    learning_rate: 0.04577695514790086
+Number of features: 8
+Chosen Features:
+     no_of_dependents_4
+     no_of_dependents_5
+     total_collateral
+     no_of_dependents_0
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+
+Best F1 so far: 0.7734487734487735
+Accuracy = 0.6323185011709602
+Holdout F1 Score: 0.7652173913043477
+Holdout Accuracy = 0.6206088992974239
+Hyperparameters:
+    max_depth: 8
+    random_state: 42
+    min_split_loss: 5
+    min_child_weight: 8
+    subsample: 0.22773493903700184
+    reg_lambda: 4
+    reg_alpha: 3
+    learning_rate: 0.027806703810304933
+Number of features: 11
+Chosen Features:
+     education_ Not Graduate
+     no_of_dependents_1
+     self_employed_ No
+     no_of_dependents_3
+     term_times_income
+     lux_times_res
+     education_ Graduate
+     loan_coll_ratio
+     loan_income_ratio
+     commercial_assets_value
+     bank_asset_value
+
+
 Best F1 so far: 0.7734487734487735
 Accuracy = 0.6323185011709602
 Holdout F1 Score: 0.7663280116110306
@@ -70,7 +123,3 @@ Chosen Features:
      loan_income_ratio
      commercial_assets_value
      bank_asset_value
-
-
-
-

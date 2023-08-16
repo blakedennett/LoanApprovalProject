@@ -63,13 +63,13 @@ clf = GridSearchCV(decisiontree, hyperparameters, cv=2, verbose=1, n_jobs=-1, sc
 
 
 hyperparameters = {
-            "max_depth": range(4, 15, 4),                 # 4 to 32 levels
-            "min_split_loss": range(2, 9, 2),            # 0 to 12
-            "min_child_weight": range(3, 12, 2),          # 1 to 12
-            "subsample": [0.05, 0.08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1],                # 0.1 to 1
-            "reg_lambda": range(2, 7),                 # 2 to 7
-            "reg_alpha": range(1, 5),                  # 1 to 3
-            "learning_rate": [0, 0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.008, 0.099]             # 0 to 0.1
+            "max_depth": range(4, 15, 4),                 
+            "min_split_loss": range(2, 9, 2),           
+            "min_child_weight": range(3, 12, 3),          
+            "subsample": [0.05, 0.08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9],                 
+            "reg_lambda": range(2, 7),                 
+            "reg_alpha": range(1, 5),                  
+            "learning_rate": [0.001, 0.002, 0.003, 0.005, 0.008, 0.099]             
         }
 
 # create classifier 
@@ -92,8 +92,9 @@ parameters = {'var_smoothing': np.logspace(0,-9, num=1000)}
 # run_gridsearch(gnb, parameters, 20)
 
 
-
-
+# Best parameters:
+# {'var_smoothing': 1.0}
+# Best F1 score: 0.766036205723853
 
 
 
@@ -103,13 +104,13 @@ parameters = {'var_smoothing': np.logspace(0,-9, num=1000)}
 
 
 hyperparameters = {
-            "max_depth": range(15, 32),                    
+            "max_depth": range(15, 32, 4),                    
             "min_samples_split": range(4, 8),             
-            "min_samples_leaf": range(0, 6),             
+            "min_samples_leaf": range(0, 7, 2),             
             "bootstrap": [True, False],
             "warm_start": [True, False],
-            "min_weight_fraction_leaf": (0, 0.02, 0.023, 0.026, 0.029, 0.03, 0.036, 0.039, 0.05, 0.07),     # 0 to 0.5
-            "n_estimators": [50, 75, 125, 150, 185, 220, 250, 290, 330, 360, 390, 420, 450, 475, 500],
+            "min_weight_fraction_leaf": (0.02, 0.023, 0.026, 0.029, 0.03, 0.036, 0.039, 0.05),     # 0 to 0.5
+            "n_estimators": [150, 220, 290, 330, 390, 420, 500],
             'criterion': ['gini', 'entropy', 'log_loss']
         }
 
@@ -130,8 +131,8 @@ rfc = RandomForestClassifier()
 # set up hyperparameters for kneighbors classifier
 hyperparameters = {
         "weights": ['uniform', 'distance'],
-        "n_neighbors": range(4, 33),        # 4 to 30
-        "p": range(1, 3),                    # 1 to 2
+        "n_neighbors": range(4, 33),        
+        "p": range(1, 3),                   
         "algorithm": ['auto', 'ball_tree', 'kd_tree', 'brute']
     }
 
@@ -140,4 +141,6 @@ kneighbors = KNeighborsClassifier()
 
 # run_gridsearch(kneighbors, hyperparameters, 20)
 
-# 9280 in 2 minutes
+# Best parameters:
+# {'algorithm': 'auto', 'n_neighbors': 31, 'p': 2, 'weights': 'uniform'}
+# Best F1 score: 0.7432682909080076
