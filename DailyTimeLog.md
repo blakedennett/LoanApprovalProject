@@ -109,6 +109,11 @@
 * researched further neural network architectures
 
 ### Day 22
+* Attempted Grid Search on Neural Network
+* Got Hyperband Tuner working
+* Grid Search random forest
+
+### Day 23
 *
 *
 *

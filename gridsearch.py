@@ -8,6 +8,7 @@ import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
+import winsound
 
 
 
@@ -75,8 +76,12 @@ hyperparameters = {
 # create classifier 
 xgb = XGBClassifier()
 
-run_gridsearch(xgb, hyperparameters)
+# run_gridsearch(xgb, hyperparameters)
 
+
+# Best parameters:
+# {'learning_rate': 0.001, 'max_depth': 4, 'min_child_weight': 3, 'min_split_loss': 6, 'reg_alpha': 2, 'reg_lambda': 3, 'subsample': 0.9}
+# Best F1 score: 0.7669218710047911
 
 
 
@@ -109,14 +114,15 @@ hyperparameters = {
             "min_samples_leaf": range(0, 7, 2),             
             "bootstrap": [True, False],
             "warm_start": [True, False],
-            "min_weight_fraction_leaf": (0.02, 0.023, 0.026, 0.029, 0.03, 0.036, 0.039, 0.05),     # 0 to 0.5
+            "min_weight_fraction_leaf": (0.02, 0.023, 0.029, 0.03, 0.036, 0.039, 0.05),     # 0 to 0.5
             "n_estimators": [150, 220, 290, 330, 390, 420, 500],
             'criterion': ['gini', 'entropy', 'log_loss']
         }
 
 rfc = RandomForestClassifier()
 
-# run_gridsearch(rfc, hyperparameters)
+run_gridsearch(rfc, hyperparameters)
+winsound.Beep(600, 1000)
 
 
 

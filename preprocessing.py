@@ -84,8 +84,6 @@ plt.tight_layout()
 
 def main():
     plt.show()
-    for r in holdout.columns:
-        print(r)
 
 if __name__ == '__main__':
     main()

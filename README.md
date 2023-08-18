@@ -255,6 +255,9 @@
 
 #### Final Model Results
 
+* <a href="./FinalTrees.ipynb">Final Trees<a>
+
+
 <h4>Without Cibil Score</h4>
 
 |                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
@@ -269,10 +272,13 @@
 
 <h4>GridSearchCV Results</h4>
 
+* <a href="./gridsearch.py">Grid Search File<a>
+
+
 
 |                   |DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|------------|--------------|----------|------------|----------|
-|Holdout F1 Score   |76.41       |000000000     |76.41     |00000       |73.86     |
+|Holdout F1 Score   |76.41       |76.16         |76.41     |00000       |73.86     |
 
 
 <h4>Although I mostly used a hands-on approach, I also wanted to use GridSearchCV to get some exposure to it.</h4>
@@ -291,6 +297,9 @@
 
 
 ## Neural Network
+
+* <a href="./NeuralNetwork.py">Neural Network<a>
+
 
 
 ## Acknowledgments
