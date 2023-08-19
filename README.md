@@ -289,11 +289,11 @@
 
 |                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|-------|------------|--------------|----------|------------|----------|
-|Holdout F1         |63.74  |76.52       |**76.86**     |76.05     |99.62       |74.74     |
-|Holdout Accuracy   |55.50  |62.06       |**62.76**     |61.36     |99.53       |60.42     |
+|Holdout F1         |00000  |00000       |000000000     |71.61     |99.62       |74.85     |
+|Holdout Accuracy   |00000  |00000       |000000000     |61.59     |99.53       |60.66     |
 
 
-<h4>I was curious about how the models would have gone if I had added the Cibil Score feature. I originally removed it because the vanilla tree was already getting a near perfect score. Therefore, I decided to just put up the holdout results.</h4>
+<h4>I was curious about how the models would have gone if I had added the Cibil Score feature. I originally removed it because the vanilla tree was already getting a near perfect score. Therefore, I decided to just put up the holdout results to see how what the results could have been with this feature included.</h4>
 
 
 ## Neural Network

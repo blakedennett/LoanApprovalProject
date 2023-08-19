@@ -114,6 +114,11 @@
 * Grid Search random forest
 
 ### Day 23
+* Made an f1 score callback
+* Used Hyperband to get best epoch
+* Used tuner to get best number and size of layers
+
+### Day 24
 *
 *
 *

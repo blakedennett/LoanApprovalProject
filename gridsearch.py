@@ -109,13 +109,13 @@ parameters = {'var_smoothing': np.logspace(0,-9, num=1000)}
 
 
 hyperparameters = {
-            "max_depth": range(15, 32, 4),                    
-            "min_samples_split": range(4, 8),             
+            "max_depth": range(15, 31, 5),                    
+            "min_samples_split": range(4, 9, 2),             
             "min_samples_leaf": range(0, 7, 2),             
             "bootstrap": [True, False],
             "warm_start": [True, False],
-            "min_weight_fraction_leaf": (0.02, 0.023, 0.029, 0.03, 0.036, 0.039, 0.05),     # 0 to 0.5
-            "n_estimators": [150, 220, 290, 330, 390, 420, 500],
+            "min_weight_fraction_leaf": (0.02, 0.026, 0.035, 0.05),    
+            "n_estimators": [150, 250, 350, 450],
             'criterion': ['gini', 'entropy', 'log_loss']
         }
 
