@@ -306,7 +306,7 @@
 
 #### Keras Hyperband Tuner
 
-````{python}
+```python
 def build_model(hp):
     model = Sequential()
 
@@ -333,7 +333,7 @@ tuner = kt.Hyperband(build_model,
                      factor=3,
                      project_name='Hyperband_log4'
                      )
-````
+```
 
 #### Results and Metrics
 
