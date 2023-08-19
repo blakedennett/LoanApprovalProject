@@ -27,7 +27,7 @@
 
 <h4>My project is broken up into three parts. The first was visualizations which took about one week (18 hours). I wanted exposure to Power Bi so I made 24 relevant graphs. (Only 21 were put into this readme file.) I felt that these graphs gave huge insight into the dataset and helped me in my analysis section of my project.</h4>
 
-* #### Data Analysis
+* #### Analysis
 
 <h4>The second part of my project was data analysis. This also took 1 week (18 hours). This phase was a little tough because there was very little insight as to specifics on what the data meant. My graphs really helped me get some ideas though. This work was about one or two day of data cleaning and the rest was looking into questions I had. One big bummer was that there wasn't any dates to work with which could have led to much more work in this area.</h4>
 
@@ -289,11 +289,11 @@
 
 |                   |Vanilla|DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|-------|------------|--------------|----------|------------|----------|
-|Holdout F1         |00000  |00000       |000000000     |71.61     |99.62       |74.85     |
-|Holdout Accuracy   |00000  |00000       |000000000     |61.59     |99.53       |60.66     |
+|Holdout F1         |99.81  |99.81       |95.46         |71.61     |99.62       |74.85     |
+|Holdout Accuracy   |99.77  |99.77       |94.61         |61.59     |99.53       |60.66     |
 
 
-<h4>I was curious about how the models would have gone if I had added the Cibil Score feature. I originally removed it because the vanilla tree was already getting a near perfect score. Therefore, I decided to just put up the holdout results to see how what the results could have been with this feature included.</h4>
+<h4>I was curious about how the models would have gone if I had added the Cibil Score feature. I originally removed it because the vanilla tree was already getting a near perfect score. Therefore, I decided to just put up the holdout results to see how what the results could have been with this feature included. Honestly, a few of the models still struggled more than I thought they would. However, these models were not selected with the Cibil score in mind and likely would have done much better if so.</h4>
 
 
 ## Neural Network
