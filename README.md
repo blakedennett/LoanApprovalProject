@@ -27,7 +27,7 @@
 
 <h4>My project is broken up into three parts. The first was visualizations which took about one week (18 hours). I wanted exposure to Power Bi so I made 24 relevant graphs. (Only 21 were put into this readme file.) I felt that these graphs gave huge insight into the dataset and helped me in my analysis section of my project.</h4>
 
-* #### Analysis
+* #### Data Analysis Summary
 
 <h4>The second part of my project was data analysis. This also took 1 week (18 hours). This phase was a little tough because there was very little insight as to specifics on what the data meant. My graphs really helped me get some ideas though. This work was about one or two day of data cleaning and the rest was looking into questions I had. One big bummer was that there wasn't any dates to work with which could have led to much more work in this area.</h4>
 
@@ -300,6 +300,41 @@
 
 * <a href="./NeuralNetwork.py">Neural Network<a>
 
+#### Overview
 
+<h4>To build my Neural Network, I used Tensorflow to build a model from sratch. Because the dataset was small, I was able to run it on my laptop with a CPU and it only took about 8 seconds (without any tuning). I decided not to do the random, manual hyperparameter adjustments her like I did with the decision tree models. Instead, I ended up using the Keras tuner called Hyperband. I originally tried GridSearchCV, but I fortunately got very stuck and found something much better and more efficient anyways. Overall, I was disappointed with the results I got, but ultimately I learned a lot and am very happy with the neural network I built.</h4>
+
+#### Keras Hyperband Tuner
+
+````{python}
+def build_model(hp):
+    model = Sequential()
+
+    hp_activation = hp.Choice('activation', values=['relu', 'tanh', 'sigmoid'])
+
+    for i in range(hp.Int('num_layers', 1, 3)):
+        hp_units = hp.Int(f'layer{i+1}', min_value=30, max_value=240, step=30)
+        model.add(Dense(units=hp_units, input_dim=num_features, activation=hp_activation))
+        # use hyperband to tune dropout rate
+        hp_dropout_rate = hp.Choice(f'dropout{i+1}', values=[0.0, 0.01, 0.001, 0.0001])
+        model.add(Dropout(rate=hp_dropout_rate))
+
+    model.add(Dense(1, activation='sigmoid'))
+
+    hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001])
+    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=hp_learning_rate), metrics=[Precision(), Recall()])
+
+    return model
+
+
+tuner = kt.Hyperband(build_model,
+                     objective='val_loss',
+                     max_epochs=20,
+                     factor=3,
+                     project_name='Hyperband_log4'
+                     )
+````
+
+#### Results and Metrics
 
 ## Acknowledgments
