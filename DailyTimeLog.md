@@ -119,6 +119,11 @@
 * Used tuner to get best number and size of layers
 
 ### Day 24
+* Finished final trees file
+* Updated and fixed Readme file
+* cleaned up repository
+
+### Day 25
 *
 *
 *

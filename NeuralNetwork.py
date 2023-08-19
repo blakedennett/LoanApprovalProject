@@ -168,17 +168,6 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
-hyperparameters = {
-    "batch_size": [64, 80],
-    "epochs": [5, 10],
-    "learning_rate": [0.1, 0.01],
-    'dropout_rate': [0.2, 0.9],
-    'num_layers': [1, 2],
-    'num_neurons': [32, 64]
-}
-
-
-
     # history = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=epochs, batch_size=batch_size, callbacks=[lr_callback])
 
 

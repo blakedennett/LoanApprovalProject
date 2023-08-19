@@ -300,11 +300,13 @@
 
 * <a href="./NeuralNetwork.py">Neural Network<a>
 
-#### Overview
+### Overview
 
 <h4>To build my Neural Network, I used Tensorflow to build a model from sratch. Because the dataset was small, I was able to run it on my laptop with a CPU and it only took about 8 seconds (without any tuning). I decided not to do the random, manual hyperparameter adjustments her like I did with the decision tree models. Instead, I ended up using the Keras tuner called Hyperband. I originally tried GridSearchCV, but I fortunately got very stuck and found something much better and more efficient anyways. Overall, I was disappointed with the results I got, but ultimately I learned a lot and am very happy with the neural network I built.</h4>
 
-#### Keras Hyperband Tuner
+### Keras Hyperband Tuner
+
+<h4>To find the best hyperparameters, I used Hyperband from the Keras package. The was hyperband works is it sets up a bracket system used in sports and compares different models based on the given parameters. This is an efficient tuner because it only goes for a few epochs, then moves on with the better model. Each round, half of the potential models are removed. Another bonus is that the tuner makes a log of the results, so if I want to make a small change and rerun the program, the entire tuner does not need to redo the whole bracket. The tuner decided the number of layers, the number of neurons in each layer, the activation function, the initial learning rate, the number of epochs, and the dropout rate.</h4>
 
 ```python
 def build_model(hp):
@@ -331,10 +333,28 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log4'
+                     project_name='Hyperband_log'
                      )
+
+stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
+
+tuner.search(x_train, y_train, epochs=50, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
 ```
 
-#### Results and Metrics
+### Scheduled Learning Rate
+
+<h4>One way to improve a Neural Network is through using a learning rate scheduler. The learning rate determines how big of changes to make after each iteration. At the beginning, it is better to have a larger learning rate to get the neural network into a good position. Towards the end of training through the epochs, though, the learning rate gets smaller so that the best model can be found. Sadly, I wasn't able to figure out how to implement this to be adjusted with the hyperband tuner, so I had to manually find the best parameters for it.</h4>
+
+```python
+def lr_schedule(epoch, lr):
+    initial_learning_rate = .01
+    decay_rate = 0.99
+    epoch_rate = 2
+    return initial_learning_rate * math.pow(decay_rate, math.floor(epoch/epoch_rate))
+
+lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
+```
+
+### Results and Metrics
 
 ## Acknowledgments
