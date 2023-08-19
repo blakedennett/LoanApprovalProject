@@ -31,7 +31,7 @@
 
 <h4>The second part of my project was data analysis. This also took 1 week (18 hours). This phase was a little tough because there was very little insight as to specifics on what the data meant. My graphs really helped me get some ideas though. This work was about one or two day of data cleaning and the rest was looking into questions I had. One big bummer was that there wasn't any dates to work with which could have led to much more work in this area.</h4>
 
-* #### Machine Learning
+* #### Machine  Learning 
 
 <h4>The third part of my project was machine learning. This took about</h4>
 <a href="https://www.kaggle.com/datasets/architsharma01/loan-approval-prediction-dataset">Kaggle Dataset<a>
