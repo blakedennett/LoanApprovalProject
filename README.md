@@ -29,11 +29,17 @@
 
 * #### Data Analysis Summary
 
-<h4>The second part of my project was data analysis. This also took 1 week (18 hours). This phase was a little tough because there was very little insight as to specifics on what the data meant. My graphs really helped me get some ideas though. This work was about one or two day of data cleaning and the rest was looking into questions I had. One big bummer was that there wasn't any dates to work with which could have led to much more work in this area.</h4>
+<h4>The second part of my project was data analysis. This also took 1 week (18 hours). This phase was a little tough because there was very little insight as to specifics on what the data meant. My graphs really helped me get some ideas though. This was roughly one or two days of data cleaning and the rest was looking into questions I had. Unfortunately, there weren't any dates to work with which could have led to much more work in this area.</h4>
 
-* #### Machine Learning Summary 
+* #### Decision Tree Summary 
 
-<h4>The third part of my project was machine learning. This took about</h4>
+<h4>The third part of my project was machine learning. This took two weeks (36 hours). I used five different types of decision trees and had the hyperparameters randomly selected in an infinite while loop with each type running in parrellel. The results were written to a file when a new best score was found. This took a bit of manual changes and a lot of cpu time but it yeilded great results.</h4>
+
+* #### Neural Network Summary
+
+<h4>The fourth part of my project was a neural network which took roughly another two weeks. I used Tensorflow to build the network and used a Keras tuner called Hyperband that selected most of the hyperparameters and logged them for me. This was a slick tool I found and I was happy to get it working. Additionally, I was able to implement a learning rate scheduler. I was a bit disappointed about the results, but I think that it primarily underperformed because of such little data, not because of the model itself.</h4>
+
+
 <a href="https://www.kaggle.com/datasets/architsharma01/loan-approval-prediction-dataset">Kaggle Dataset<a>
 
 
@@ -355,6 +361,24 @@ def lr_schedule(epoch, lr):
 lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 ```
 
+### Final Hyperparameters
+
+<h4>Number of Layers: 4</h4>
+<h4>Number of Neurons in Each Layer: 150, 150, 30, 300</h4>
+<h4>Dropout Rate in Each Layer: 0.01, 0.001, 0.0001, 0.001</h4>
+<h4>Activation Function: relu</h4>
+<h4>Learning Rate: 0.001</h4>
+<h4>Epochs: 1</h4>
+
 ### Results and Metrics
+
+|                   |Without Cibil Score|DecisionTree|
+|-------------------|-------------------|------------|
+|Validation F1      |77.12              |77.29       |
+|Holdout F1         |76.41              |76.63       |
+|Validation Accuracy|62.76              |63.11       |
+|Holdout Accuracy   |61.83              |62.30       |
+
+
 
 ## Acknowledgments

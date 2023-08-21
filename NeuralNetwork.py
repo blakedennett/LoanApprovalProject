@@ -6,7 +6,7 @@ from keras.layers import Dropout
 from keras.optimizers import Adam
 from keras.callbacks import LearningRateScheduler
 import math
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, accuracy_score
 from keras.metrics import Precision, Recall
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
@@ -21,9 +21,6 @@ start_time = time.time()
 
 x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
 
-x_train.drop(columns=[' no_of_dependents_0', ' no_of_dependents_1', ' no_of_dependents_2', ' no_of_dependents_3', ' no_of_dependents_4', ' no_of_dependents_5'], inplace=True)
-x_test.drop(columns=[' no_of_dependents_0', ' no_of_dependents_1', ' no_of_dependents_2', ' no_of_dependents_3', ' no_of_dependents_4', ' no_of_dependents_5'], inplace=True)
-holdout.drop(columns=[' no_of_dependents_0', ' no_of_dependents_1', ' no_of_dependents_2', ' no_of_dependents_3', ' no_of_dependents_4', ' no_of_dependents_5'], inplace=True)
 
 num_features = x_train.shape[1]
 
@@ -32,16 +29,16 @@ def build_model(hp):
 
     hp_activation = hp.Choice('activation', values=['relu', 'tanh', 'sigmoid'])
 
-    for i in range(hp.Int('num_layers', 1, 3)):
-        hp_units = hp.Int(f'layer{i+1}', min_value=30, max_value=240, step=30)
+    for i in range(hp.Int('num_layers', 1, 8)):
+        hp_units = hp.Int(f'layer{i+1}', min_value=15, max_value=315, step=30)
         model.add(Dense(units=hp_units, input_dim=num_features, activation=hp_activation))
         # use hyperband to tune dropout rate
-        hp_dropout_rate = hp.Choice(f'dropout{i+1}', values=[0.0, 0.01, 0.001, 0.0001])
+        hp_dropout_rate = hp.Choice(f'dropout{i+1}', values=[0.0, 0.01, 0.001, 0.0001, 0.00001])
         model.add(Dropout(rate=hp_dropout_rate))
 
     model.add(Dense(1, activation='sigmoid'))
 
-    hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001])
+    hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001, 0.00001])
     model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=hp_learning_rate), metrics=[Precision(), Recall()])
 
     return model
@@ -51,7 +48,7 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log4'
+                     project_name='Hyperband_log'
                      )
 
 
@@ -85,14 +82,15 @@ print(tuner.results_summary())
 # Get the optimal hyperparameters
 best_hps=tuner.get_best_hyperparameters(num_trials=1)[0]
 
-print()
-print()
+print('--------------------------------------Best Hyperparameters--------------------------------------')
+print(f'Number of Layers: {best_hps.get("num_layers")}')
+print(f'Learning Rate: {best_hps.get("learning_rate")}')
+print(f'Activation: {best_hps.get("activation")}')
+for i in range(best_hps.get("num_layers")):
+    print(f'Units in Layer {i+1}: {best_hps.get("layer"+str(i+1))}')
+    print(f'Dropout Rate in Layer {i+1}: {best_hps.get("dropout"+str(i+1))}')
 
-# print(f"""
-# The hyperparameter search is complete. The optimal number of units in the first densely-connected
-# layer is {best_hps.get('units')} and the optimal learning rate for the optimizer
-# is {best_hps.get('learning_rate')} 
-# """)
+print()
 
 
 hypermodel = tuner.hypermodel.build(best_hps)
@@ -106,7 +104,7 @@ print('-----------------------------------------------Best epoch: %d------------
 model = tuner.hypermodel.build(best_hps)
 
 # Retrain the model
-model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=best_epoch, callbacks=[lr_callback, f1_callback])
+model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=best_epoch, batch_size=32, callbacks=[lr_callback, f1_callback])
 
 
 
@@ -115,14 +113,18 @@ holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))
 holdout_pred = (holdout_probabilities > 0.5).astype(int)  # Apply threshold to classify
 holdout_true = holdout[' loan_status']
 holdout_f1 = f1_score(holdout_true, holdout_pred)
+holdout_acc = accuracy_score(holdout_true, holdout_pred)
 
 probabilities = model.predict(x_test)
-pred = (probabilities > 0.5).astype(int)  # Apply threshold to classify
+pred = (probabilities > 0.5).astype(int)
 true = y_test
 f1 = f1_score(true, pred)
+accuracy = accuracy_score(true, pred)
 
 print("F1 score on Validation:", f1)
+print("Accuracy on Validation:", accuracy)
 print("F1 score on Holdout:", holdout_f1)
+print("Accuracy on Holdout:", holdout_acc)
 print("--- %s seconds ---" % (time.time() - start_time))
 
 
@@ -168,23 +170,7 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
-    # history = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=epochs, batch_size=batch_size, callbacks=[lr_callback])
 
-
- #     # After training, compute F1 score on holdout set
-    # holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))
-    # holdout_pred = (holdout_probabilities > 0.5).astype(int)  # Apply threshold to classify
-    # holdout_true = holdout[' loan_status']
-    # holdout_f1 = f1_score(holdout_true, holdout_pred)
-
-    # probabilities = model.predict(x_test)
-    # pred = (probabilities > 0.5).astype(int)  # Apply threshold to classify
-    # true = y_test
-    # f1 = f1_score(true, pred)
-
-    # print("F1 score on Validation:", f1)
-    # print("F1 score on Holdout:", holdout_f1)
-    # print("--- %s seconds ---" % (time.time() - start_time))
 
 
 # Plot loss

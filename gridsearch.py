@@ -111,7 +111,7 @@ parameters = {'var_smoothing': np.logspace(0,-9, num=1000)}
 hyperparameters = {
             "max_depth": range(15, 31, 5),                    
             "min_samples_split": range(4, 9, 2),             
-            "min_samples_leaf": range(0, 7, 2),             
+            "min_samples_leaf": range(1, 7, 2),             
             "bootstrap": [True, False],
             "warm_start": [True, False],
             "min_weight_fraction_leaf": (0.02, 0.026, 0.035, 0.05),    
@@ -122,7 +122,11 @@ hyperparameters = {
 rfc = RandomForestClassifier()
 
 run_gridsearch(rfc, hyperparameters)
-winsound.Beep(600, 1000)
+
+
+# Best parameters:
+# {'bootstrap': False, 'criterion': 'log_loss', 'max_depth': 20, 'min_samples_leaf': 2, 'min_samples_split': 4, 'min_weight_fraction_leaf': 0.05, 'n_estimators': 250, 'warm_start': False}
+# Best F1 score: 0.7636556876292391
 
 
 
