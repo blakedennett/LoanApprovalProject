@@ -124,8 +124,8 @@
 * cleaned up repository
 
 ### Day 25
-*
-*
+* Recorded best hyperparameters
+* More Hyperband adjustments
 *
 *
 

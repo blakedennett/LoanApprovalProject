@@ -48,7 +48,7 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log'
+                     project_name='Hyperband_log2.0'
                      )
 
 
