@@ -126,6 +126,11 @@
 ### Day 25
 * Recorded best hyperparameters
 * More Hyperband adjustments
+* added to readme file
+
+### Day 26
+*
+*
 *
 *
 

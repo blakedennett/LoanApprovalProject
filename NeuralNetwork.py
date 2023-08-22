@@ -19,7 +19,7 @@ from keras.callbacks import Callback
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True)
 
 
 num_features = x_train.shape[1]
@@ -29,7 +29,7 @@ def build_model(hp):
 
     hp_activation = hp.Choice('activation', values=['relu', 'tanh', 'sigmoid'])
 
-    for i in range(hp.Int('num_layers', 1, 8)):
+    for i in range(hp.Int('num_layers', 1, 4)):
         hp_units = hp.Int(f'layer{i+1}', min_value=15, max_value=315, step=30)
         model.add(Dense(units=hp_units, input_dim=num_features, activation=hp_activation))
         # use hyperband to tune dropout rate
@@ -56,7 +56,7 @@ stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
 
 def lr_schedule(epoch, lr):
     initial_learning_rate = .01
-    decay_rate = 0.99
+    decay_rate = 0.96
     epoch_rate = 2
     return initial_learning_rate * math.pow(decay_rate, math.floor(epoch/epoch_rate))
 
@@ -82,7 +82,7 @@ print(tuner.results_summary())
 # Get the optimal hyperparameters
 best_hps=tuner.get_best_hyperparameters(num_trials=1)[0]
 
-print('--------------------------------------Best Hyperparameters--------------------------------------')
+print('---------------------------------------------Best Hyperparameters------------------------------------------------')
 print(f'Number of Layers: {best_hps.get("num_layers")}')
 print(f'Learning Rate: {best_hps.get("learning_rate")}')
 print(f'Activation: {best_hps.get("activation")}')
@@ -104,7 +104,7 @@ print('-----------------------------------------------Best epoch: %d------------
 model = tuner.hypermodel.build(best_hps)
 
 # Retrain the model
-model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=best_epoch, batch_size=32, callbacks=[lr_callback, f1_callback])
+model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=50, batch_size=32, callbacks=[lr_callback, f1_callback])
 
 
 

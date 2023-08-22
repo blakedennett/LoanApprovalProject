@@ -364,10 +364,18 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 ### Final Hyperparameters
 
 <h4>Number of Layers: 4</h4>
-<h4>Number of Neurons in Each Layer: 150, 150, 30, 300</h4>
-<h4>Dropout Rate in Each Layer: 0.01, 0.001, 0.0001, 0.001</h4>
+<h4>Number of Neurons in Each Layer: 255, 105, 195, 15</h4>
+<h4>Dropout Rate in Each Layer: 0.01, 0.01, 0, 0</h4>
 <h4>Activation Function: relu</h4>
-<h4>Learning Rate: 0.001</h4>
+<h4>Learning Rate: 0.1</h4>
+<h4>Epochs: 1</h4>
+
+##### With Cibil Score
+<h4>Number of Layers: 4</h4>
+<h4>Number of Neurons in Each Layer: 255, 105, 195, 15</h4>
+<h4>Dropout Rate in Each Layer: 0.01, 0.01, 0, 0</h4>
+<h4>Activation Function: relu</h4>
+<h4>Learning Rate: 0.1</h4>
 <h4>Epochs: 1</h4>
 
 ### Results and Metrics
