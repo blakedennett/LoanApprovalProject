@@ -380,12 +380,12 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 
 ### Results and Metrics
 
-|                   |Without Cibil Score|DecisionTree|
+|                   |Without Cibil Score|Including   |
 |-------------------|-------------------|------------|
-|Validation F1      |77.12              |77.29       |
-|Holdout F1         |76.41              |76.63       |
-|Validation Accuracy|62.76              |63.11       |
-|Holdout Accuracy   |61.83              |62.30       |
+|Validation F1      |77.12              |77.18       |
+|Holdout F1         |76.41              |76.52       |
+|Validation Accuracy|62.76              |62.88       |
+|Holdout Accuracy   |61.83              |62.06       |
 
 
 

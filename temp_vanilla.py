@@ -7,7 +7,7 @@ from keras.optimizers import Adam
 from keras.callbacks import LearningRateScheduler
 import math
 from sklearn.metrics import f1_score, accuracy_score
-from keras.metrics import Precision, Recall
+from keras.metrics import Precision, Recall, AUC
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 import keras_tuner as kt
@@ -25,20 +25,55 @@ num_features = x_train.shape[1]
 
 model = Sequential()
 
+model.add(Dense(units=500, input_dim=num_features, activation='relu'))
+model.add(Dense(units=200, input_dim=num_features, activation='relu'))
 model.add(Dense(units=16, input_dim=num_features, activation='relu'))
 
 model.add(Dense(1, activation='sigmoid'))
 
-model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=[Precision(), Recall()])
+model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=['accuracy'])
 
-history = model.fit(x_train, y_train, epochs=20, batch_size=32, validation_split=0.2, verbose=1)
+def lr_schedule(epoch, lr):
+    initial_learning_rate = .1
+    decay_rate = 0.90
+    epoch_rate = 2
+    return initial_learning_rate * math.pow(decay_rate, math.floor(epoch/epoch_rate))
 
-y_pred = model.predict(x_test)
+lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 
-y_pred = np.where(y_pred > 0.5, 1, 0)
-
-print("Accuracy score:", accuracy_score(y_test, y_pred))
-
-print("F1 score:", f1_score(y_test, y_pred))
+history = model.fit(x_train, y_train, epochs=50, batch_size=32, validation_data=(x_test, y_test), verbose=1, callbacks=[lr_callback])
 
 
+holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))
+holdout_pred = (holdout_probabilities > 0.5).astype(int)  # Apply threshold to classify
+holdout_true = holdout[' loan_status']
+holdout_f1 = f1_score(holdout_true, holdout_pred)
+holdout_acc = accuracy_score(holdout_true, holdout_pred)
+
+probabilities = model.predict(x_test)
+pred = (probabilities > 0.5).astype(int)
+true = y_test
+f1 = f1_score(true, pred)
+accuracy = accuracy_score(true, pred)
+
+print("F1 score on Validation:", f1)
+print("Accuracy on Validation:", accuracy)
+print("F1 score on Holdout:", holdout_f1)
+print("Accuracy on Holdout:", holdout_acc)
+print("--- %s seconds ---" % (time.time() - start_time))
+
+# plot loss during training
+plt.subplot(211)
+plt.title('Loss')
+plt.plot(history.history['loss'], label='train')
+plt.plot(history.history['val_loss'], label='validation')
+plt.legend()
+# plt.show()
+
+# plot accuracy during training
+plt.subplot(212)
+plt.title('Accuracy')
+plt.plot(history.history['accuracy'], label='train')
+plt.plot(history.history['val_accuracy'], label='validation')
+plt.legend()
+# plt.show()

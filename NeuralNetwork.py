@@ -7,7 +7,7 @@ from keras.optimizers import Adam
 from keras.callbacks import LearningRateScheduler
 import math
 from sklearn.metrics import f1_score, accuracy_score
-from keras.metrics import Precision, Recall
+from keras.metrics import Precision, Recall, AUC, Accuracy
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 import keras_tuner as kt
@@ -20,6 +20,17 @@ import time
 start_time = time.time()
 
 x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True)
+
+
+def str_to_object(string):
+    if string == 'auc':
+        return AUC()
+    elif string == 'precision':
+        return Precision()
+    elif string == 'recall':
+        return Recall()
+    else:
+        return Accuracy()
 
 
 num_features = x_train.shape[1]
@@ -38,14 +49,19 @@ def build_model(hp):
 
     model.add(Dense(1, activation='sigmoid'))
 
+    metric_choice = hp.Choice('metric', values=['auc', 'precision', 'recall', 'accuracy'])
+
+    # Map the metric_choice to the corresponding metric function
+    metric_to_use = str_to_object(metric_choice)
+
     hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001, 0.00001])
-    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=hp_learning_rate), metrics=[Precision(), Recall()])
+    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=hp_learning_rate), metrics=[metric_to_use])
 
     return model
 
 
 tuner = kt.Hyperband(build_model,
-                     objective='val_loss',
+                     objective='accuracy',
                      max_epochs=20,
                      factor=3,
                      project_name='Hyperband_log2.0'
@@ -56,7 +72,7 @@ stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
 
 def lr_schedule(epoch, lr):
     initial_learning_rate = .01
-    decay_rate = 0.96
+    decay_rate = 0.90
     epoch_rate = 2
     return initial_learning_rate * math.pow(decay_rate, math.floor(epoch/epoch_rate))
 

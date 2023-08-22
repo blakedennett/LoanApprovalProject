@@ -129,6 +129,11 @@
 * added to readme file
 
 ### Day 26
+* Tried vanilla neural network
+* Made more options for metrics
+* Resume work
+
+### Day 27
 *
 *
 *
