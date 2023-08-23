@@ -19,7 +19,7 @@ from keras.callbacks import Callback
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True)
 
 
 def str_to_object(string):
@@ -30,7 +30,7 @@ def str_to_object(string):
     elif string == 'recall':
         return Recall()
     else:
-        return Accuracy()
+        return string
 
 
 num_features = x_train.shape[1]
@@ -49,9 +49,8 @@ def build_model(hp):
 
     model.add(Dense(1, activation='sigmoid'))
 
-    metric_choice = hp.Choice('metric', values=['auc', 'precision', 'recall', 'accuracy'])
+    metric_choice = hp.Choice('metric', values=['accuracy', 'auc', 'precision', 'recall'])
 
-    # Map the metric_choice to the corresponding metric function
     metric_to_use = str_to_object(metric_choice)
 
     hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001, 0.00001])
@@ -61,7 +60,7 @@ def build_model(hp):
 
 
 tuner = kt.Hyperband(build_model,
-                     objective='accuracy',
+                     objective='val_loss',
                      max_epochs=20,
                      factor=3,
                      project_name='Hyperband_log2.0'
@@ -91,7 +90,7 @@ class F1ScoreCallback(Callback):
 
 f1_callback = F1ScoreCallback(validation_data=(x_test, y_test))
 
-tuner.search(x_train, y_train, epochs=50, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
+tuner.search(x_train, y_train, epochs=5, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
 
 print(tuner.results_summary())
 

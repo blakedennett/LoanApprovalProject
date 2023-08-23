@@ -129,7 +129,7 @@
 * added to readme file
 
 ### Day 26
-* Tried vanilla neural network
+* Started Shap values
 * Made more options for metrics
 * Resume work
 
@@ -141,3 +141,7 @@
 
 
 ---------------------------------------------- future notes ----------------------------------------------
+using winsorizing to work with outliers
+using standard scaler to normalize data
+embeddings for high-cardinality categorical features for ordinal features (dependents)
+more advanced data splitting techniques

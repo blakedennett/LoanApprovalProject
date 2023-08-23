@@ -2,12 +2,14 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
+from scipy.stats.mstats import winsorize
 
 
 
-def get_preprocessed_df(with_cibil=False):
+def get_preprocessed_df(with_cibil=False, standard_scaling=False):
 
     df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dataset.csv')
 
@@ -30,6 +32,10 @@ def get_preprocessed_df(with_cibil=False):
     df[numerical_cols] = df[numerical_cols].where(~condition, other=upper_limits, axis=0)
 
 
+    for col in numerical_cols:
+        df[col] = winsorize(df[col], limits=(0.03, 0.97))
+
+    # get rid of negative values
     df[numerical_cols] = df[numerical_cols].applymap(lambda x: x if x >= 0 else 0)
 
     collateral_df = df[[' residential_assets_value',  ' commercial_assets_value', ' bank_asset_value', ' luxury_assets_value']]
@@ -62,6 +68,13 @@ def get_preprocessed_df(with_cibil=False):
     y = df[' loan_status']
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+    if standard_scaling:
+        numerical_cols = df.select_dtypes(include=['float64', 'int64']).columns
+        scaler = StandardScaler()
+        x_train[numerical_cols] = scaler.fit_transform(x_train[numerical_cols])
+        x_test[numerical_cols] = scaler.transform(x_test[numerical_cols])
+        holdout[numerical_cols] = scaler.transform(holdout[numerical_cols])
 
     return x_train, x_test, y_train, y_test, holdout
 

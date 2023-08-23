@@ -13,13 +13,14 @@ from sklearn.model_selection import GridSearchCV
 import keras_tuner as kt
 import numpy as np
 from keras.callbacks import Callback
+import shap
 
 
 
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True)
 
 num_features = x_train.shape[1]
 
@@ -77,3 +78,18 @@ plt.plot(history.history['accuracy'], label='train')
 plt.plot(history.history['val_accuracy'], label='validation')
 plt.legend()
 # plt.show()
+
+
+# sample_size = int(0.1 * len(x_test))
+# x_test_subset = shap.sample(x_test, sample_size)
+
+# # Create a function that predicts using your model (this is required by KernelExplainer)
+# def predict_function(input_data):
+#     return model.predict(input_data)
+
+# # Create a SHAP explainer
+# explainer = shap.KernelExplainer(predict_function, x_train)
+
+# shap_values = explainer.shap_values(x_test_subset)
+
+# shap.summary_plot(shap_values, x_test_subset, feature_names=x_train.columns)

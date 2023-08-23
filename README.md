@@ -143,7 +143,7 @@
 
 ### Outliers
 
-<h4>I looked into the numerical features for any values high or lower than three standard deviations from the average. There were 33 total that were above the upper limit and none below the lower. The values were split among the residential and commercial assets. I decided to take the values down to simply equal the upper limit.</h4>
+<h4>I looked into the numerical features for any values high or lower than three standard deviations from the average. There were 33 total that were above the upper limit and none below the lower. The values were split among the residential and commercial assets. I decided to take the values down to simply equal the upper limit. Additionally, I wanted to try something I hadn't done which came from a package called winsorize. This basically does the same thing by taking values above and below a certain percentage (0.01 or 0.99) and caps them to the limit.</h4>
 
 ### Negative Values
 
@@ -229,7 +229,7 @@
 
 * <a href="./preprocessing.py">Preprocessing File<a>
 
-<h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features. Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 four-way training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
+<h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features. For the nueral network specifically, I used standard scaling, making numerical features go from 0 to 1 to optimize training time. Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 four-way training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
 
 #### Feature Importance
 
