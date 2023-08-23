@@ -134,6 +134,11 @@
 * Resume work
 
 ### Day 27
+* added standard scaler
+* added winsorizer
+* used ordinal encoder
+
+### Day 28
 *
 *
 *
@@ -141,7 +146,5 @@
 
 
 ---------------------------------------------- future notes ----------------------------------------------
-using winsorizing to work with outliers
-using standard scaler to normalize data
-embeddings for high-cardinality categorical features for ordinal features (dependents)
 more advanced data splitting techniques
+add in steps variable to network in hyperband per epoch

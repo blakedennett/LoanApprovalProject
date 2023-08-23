@@ -7,7 +7,7 @@ from keras.optimizers import Adam
 from keras.callbacks import LearningRateScheduler
 import math
 from sklearn.metrics import f1_score, accuracy_score
-from keras.metrics import Precision, Recall, AUC, Accuracy
+from keras.metrics import Precision, Recall, AUC
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 import keras_tuner as kt

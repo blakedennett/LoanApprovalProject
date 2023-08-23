@@ -2,7 +2,9 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, OrdinalEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 from scipy.stats.mstats import winsorize
@@ -38,6 +40,12 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False):
     # get rid of negative values
     df[numerical_cols] = df[numerical_cols].applymap(lambda x: x if x >= 0 else 0)
 
+    # handle ordinal, categorical features
+    enc = OrdinalEncoder()
+    enc.fit(df[['loan_id']])
+    df[['loan_id']] = enc.transform(df[['loan_id']])
+
+
     collateral_df = df[[' residential_assets_value',  ' commercial_assets_value', ' bank_asset_value', ' luxury_assets_value']]
     df[' total_collateral'] = collateral_df.apply(lambda x: x.sum(), axis=1)
 
@@ -50,9 +58,6 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False):
     df[' col_times_term'] = df[' total_collateral'] * df[' loan_term']
 
     df[' lux_times_res'] = df[' luxury_assets_value'] * df[' residential_assets_value']
-
-    # change numerical, categorical features to strings
-    df[' no_of_dependents'] = df[' no_of_dependents'].astype(str)
 
     df[' loan_status'] = np.where(df[' loan_status'] == " Approved", 1, 0)
 

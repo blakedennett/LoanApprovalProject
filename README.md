@@ -225,13 +225,19 @@
 
 # Machine Learning
 
-#### Preprocessing
+### Preprocessing
 
 * <a href="./preprocessing.py">Preprocessing File<a>
 
-<h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features. For the nueral network specifically, I used standard scaling, making numerical features go from 0 to 1 to optimize training time. Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 four-way training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
+<h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features.</h4>
 
-#### Feature Importance
+<h4>For the nueral network specifically, I used standard scaling, making numerical features go from 0 to 1 to optimize training time (bigger numbers mean more computationally expensive).</h4>
+
+<h4>In order to handle numeric, categorical features, I used an sklearn, preprocessing package called OrdinalEncoder. This was primarily relevant for the "loan_id" column. I found that this was better than expanding the column into multiple (loan_id_1001, loan_id_1002, etc) as I had previously done.</h4>
+
+<h4> Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
+
+### Feature Importance
 
 <img src="./images/FeatImportanceGraph.PNG" alt="Feature Importance Graph">
 
