@@ -197,16 +197,16 @@
 
 |                     |Correlation|P-value|
 |---------------------|-----------|-------|
-|Number of Dependents |-0.01      |0.51|
-|Annual Income        |-0.023     |0.13|
-|Loan amount          |-0.017     |0.27|
-|Loan term            |0.008      |0.61|
-|Residential Assets   |-0.024     |0.11|
-|Commercial Assets    |0.003      |0.87|
-|Luxury Asset Value   |-0.029     |0.06|
-|Bank Asset Value     |-0.015     |0.31|
-|Loan Collateral Ratio|0.001      |0.93|
-|Loan Income Ratio    |0.003      |0.85|
+|Number of Dependents |-0.01      |0.51   |
+|Annual Income        |-0.023     |0.13   |
+|Loan amount          |-0.017     |0.27   |
+|Loan term            |0.008      |0.61   |
+|Residential Assets   |-0.024     |0.11   |
+|Commercial Assets    |0.003      |0.87   |
+|Luxury Asset Value   |-0.029     |0.06   |
+|Bank Asset Value     |-0.015     |0.31   |
+|Loan Collateral Ratio|0.001      |0.93   |
+|Loan Income Ratio    |0.003      |0.85   |
 
 
 ### Missing Asset Analysis
@@ -235,7 +235,7 @@
 
 <h4>In order to handle numeric, categorical features, I used an sklearn, preprocessing package called OrdinalEncoder. This was primarily relevant for the "loan_id" column. I found that this was better than expanding the column into multiple (loan_id_1001, loan_id_1002, etc) as I had previously done.</h4>
 
-<h4> Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing.</h4>
+<h4> Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing. Additionally, I decided to do a stratified shuffle split. The purpose of this was to make the training, validation, and holdout data each have the same or similar distributions.</h4>
 
 ### Feature Importance
 
@@ -326,17 +326,21 @@ def build_model(hp):
 
     hp_activation = hp.Choice('activation', values=['relu', 'tanh', 'sigmoid'])
 
-    for i in range(hp.Int('num_layers', 1, 3)):
-        hp_units = hp.Int(f'layer{i+1}', min_value=30, max_value=240, step=30)
+    for i in range(hp.Int('num_layers', 1, 4)):
+        hp_units = hp.Int(f'layer{i+1}', min_value=15, max_value=315, step=30)
         model.add(Dense(units=hp_units, input_dim=num_features, activation=hp_activation))
         # use hyperband to tune dropout rate
-        hp_dropout_rate = hp.Choice(f'dropout{i+1}', values=[0.0, 0.01, 0.001, 0.0001])
+        hp_dropout_rate = hp.Choice(f'dropout{i+1}', values=[0.0, 0.01, 0.001, 0.0001, 0.00001])
         model.add(Dropout(rate=hp_dropout_rate))
 
     model.add(Dense(1, activation='sigmoid'))
 
-    hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001])
-    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=hp_learning_rate), metrics=[Precision(), Recall()])
+    metric_choice = hp.Choice('metric', values=['accuracy', 'auc', 'precision', 'recall'])
+
+    metric_to_use = str_to_object(metric_choice)
+
+    hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001, 0.00001])
+    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=hp_learning_rate), metrics=[metric_to_use])
 
     return model
 
@@ -345,12 +349,13 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log'
+                     project_name='Hyperband_log2.0'
                      )
+
 
 stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
 
-tuner.search(x_train, y_train, epochs=50, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
+tuner.search(x_train, y_train, epochs=5, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
 ```
 
 ### Scheduled Learning Rate

@@ -8,6 +8,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 from scipy.stats.mstats import winsorize
+from sklearn.model_selection import StratifiedShuffleSplit
+
 
 
 
@@ -72,7 +74,20 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False):
     x = df.drop(columns=[' loan_status'])
     y = df[' loan_status']
 
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+    # Initialize the splitter
+    stratified_splitter = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+
+    # Perform the split
+    for train_index, test_index in stratified_splitter.split(df, df[' loan_status']):
+        train_data = df.iloc[train_index]
+        test_data = df.iloc[test_index]
+
+    x_train = train_data.drop(columns=[' loan_status'])
+    y_train = train_data[' loan_status']
+    x_test = test_data.drop(columns=[' loan_status'])
+    y_test = test_data[' loan_status']
+
 
     if standard_scaling:
         numerical_cols = df.select_dtypes(include=['float64', 'int64']).columns

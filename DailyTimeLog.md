@@ -139,6 +139,11 @@
 * used ordinal encoder
 
 ### Day 28
+* Resume work
+* switched to stratified split
+* shap graphs
+
+### Day 29
 *
 *
 *
@@ -148,3 +153,4 @@
 ---------------------------------------------- future notes ----------------------------------------------
 more advanced data splitting techniques
 add in steps variable to network in hyperband per epoch
+cross validation

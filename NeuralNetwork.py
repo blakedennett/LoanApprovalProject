@@ -90,7 +90,7 @@ class F1ScoreCallback(Callback):
 
 f1_callback = F1ScoreCallback(validation_data=(x_test, y_test))
 
-tuner.search(x_train, y_train, epochs=5, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
+tuner.search(x_train, y_train, epochs=5, steps_per_epoch=300, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
 
 print(tuner.results_summary())
 
@@ -101,6 +101,7 @@ print('---------------------------------------------Best Hyperparameters--------
 print(f'Number of Layers: {best_hps.get("num_layers")}')
 print(f'Learning Rate: {best_hps.get("learning_rate")}')
 print(f'Activation: {best_hps.get("activation")}')
+print(f'Metric: {best_hps.get("metric")}')
 for i in range(best_hps.get("num_layers")):
     print(f'Units in Layer {i+1}: {best_hps.get("layer"+str(i+1))}')
     print(f'Dropout Rate in Layer {i+1}: {best_hps.get("dropout"+str(i+1))}')
@@ -109,7 +110,7 @@ print()
 
 
 hypermodel = tuner.hypermodel.build(best_hps)
-history = hypermodel.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=50, callbacks=[lr_callback, f1_callback])
+history = hypermodel.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=15, callbacks=[lr_callback, f1_callback])
 
 val_f1_per_epoch = history.history['val_f1_score']
 best_epoch = val_f1_per_epoch.index(max(val_f1_per_epoch)) + 1
@@ -119,7 +120,7 @@ print('-----------------------------------------------Best epoch: %d------------
 model = tuner.hypermodel.build(best_hps)
 
 # Retrain the model
-model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=50, batch_size=32, callbacks=[lr_callback, f1_callback])
+model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=5, steps_per_epoch=100, batch_size=32, callbacks=[lr_callback, f1_callback])
 
 
 
