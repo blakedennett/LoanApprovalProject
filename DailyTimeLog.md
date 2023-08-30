@@ -141,16 +141,27 @@
 ### Day 28
 * Resume work
 * switched to stratified split
-* shap graphs
+* shap work
 
 ### Day 29
-*
-*
-*
-*
+* shap debugging
+* batch size
+* steps per epoch
 
+### Day 30
+* Number of epochs
+* new losses
+* trying new scratch network
+
+### Day 31
+*
+*
+*
+*
 
 ---------------------------------------------- future notes ----------------------------------------------
-more advanced data splitting techniques
-add in steps variable to network in hyperband per epoch
 cross validation
+epoch loop
+learning rate parameter loop 
+optimizers
+loss functions

@@ -372,6 +372,10 @@ def lr_schedule(epoch, lr):
 lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 ```
 
+#### Steps per epoch & Batch Size
+
+<h4>I had to manually find the best value for these parameters. Therefore, what I did was run a loop from 1 to 500 with a step of 50. I didn't find hardly any change in the results of the model, therefore, I chose the best number according to speed, which was 25 at about 0.75 seconds for the steps per epoch, and 450 at 0.68 seconds for the batch size.</h4>
+
 ### Final Hyperparameters
 
 <h4>Number of Layers: 4</h4>

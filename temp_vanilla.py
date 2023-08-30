@@ -14,11 +14,11 @@ import keras_tuner as kt
 import numpy as np
 from keras.callbacks import Callback
 import shap
-
-
-
 import time
-start_time = time.time()
+
+
+
+
 
 x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True)
 
@@ -26,42 +26,51 @@ num_features = x_train.shape[1]
 
 model = Sequential()
 
-model.add(Dense(units=500, input_dim=num_features, activation='relu'))
-model.add(Dense(units=200, input_dim=num_features, activation='relu'))
-model.add(Dense(units=16, input_dim=num_features, activation='relu'))
+model.add(Dense(units=315, input_dim=num_features, activation='relu'))
+model.add(Dropout(rate=0.0))
+model.add(Dense(units=45, input_dim=num_features, activation='relu'))
+model.add(Dropout(rate=0.00001))
+model.add(Dense(units=285, input_dim=num_features, activation='relu'))
+model.add(Dropout(rate=0.01))
+model.add(Dense(units=285, input_dim=num_features, activation='relu'))
+model.add(Dropout(rate=0.0001))
 
 model.add(Dense(1, activation='sigmoid'))
 
-model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=['accuracy'])
+model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=[AUC()])
 
 def lr_schedule(epoch, lr):
-    initial_learning_rate = .1
-    decay_rate = 0.90
-    epoch_rate = 2
-    return initial_learning_rate * math.pow(decay_rate, math.floor(epoch/epoch_rate))
+        initial_learning_rate = .1
+        decay_rate = 0.90
+        epoch_rate = 2
+        return initial_learning_rate * math.pow(decay_rate, math.floor(epoch/epoch_rate))
 
 lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 
-history = model.fit(x_train, y_train, epochs=10, batch_size=32, validation_data=(x_test, y_test), verbose=1, callbacks=[lr_callback])
+for i in range(1):
+    start_time = time.time()
+
+    history = model.fit(x_train, y_train, epochs=6, batch_size=16, steps_per_epoch=25, validation_data=(x_test, y_test), verbose=1, callbacks=[lr_callback])
 
 
-holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))
-holdout_pred = (holdout_probabilities > 0.5).astype(int)  # Apply threshold to classify
-holdout_true = holdout[' loan_status']
-holdout_f1 = f1_score(holdout_true, holdout_pred)
-holdout_acc = accuracy_score(holdout_true, holdout_pred)
+    holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))
+    holdout_pred = (holdout_probabilities > 0.5).astype(int)  # Apply threshold to classify
+    holdout_true = holdout[' loan_status']
+    holdout_f1 = f1_score(holdout_true, holdout_pred)
+    holdout_acc = accuracy_score(holdout_true, holdout_pred)
 
-probabilities = model.predict(x_test)
-pred = (probabilities > 0.5).astype(int)
-true = y_test
-f1 = f1_score(true, pred)
-accuracy = accuracy_score(true, pred)
+    probabilities = model.predict(x_test)
+    pred = (probabilities > 0.5).astype(int)
+    true = y_test
+    f1 = f1_score(true, pred)
+    accuracy = accuracy_score(true, pred)
 
-print("F1 score on Validation:", f1)
-print("Accuracy on Validation:", accuracy)
-print("F1 score on Holdout:", holdout_f1)
-print("Accuracy on Holdout:", holdout_acc)
-print("--- %s seconds ---" % (time.time() - start_time))
+    print("F1 score on Validation:", f1)
+    print("Accuracy on Validation:", accuracy)
+    print("F1 score on Holdout:", holdout_f1)
+    print("Accuracy on Holdout:", holdout_acc)
+    print(f'num steps: {i}')
+    print("--- %s seconds ---" % (time.time() - start_time))
 
 # plot loss during training
 plt.subplot(211)
