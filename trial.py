@@ -14,6 +14,8 @@ df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dat
 
 df[' loan_status'] = np.where(df[' loan_status'] == " Approved", 1, 0)
 
+df = df[[' loan_status', ' cibil_score']]
+
 holdout = df.sample(frac=0.1, random_state=42)
 df.drop(holdout.index, inplace=True)
 
@@ -22,8 +24,8 @@ holdout_y = holdout[' loan_status']
 holdout.drop(columns=[' loan_status'], inplace=True)
 
 
-x = df.drop(columns=[' loan_status', 'loan_id'])
-holdout.drop(columns=['loan_id'], inplace=True)
+x = df.drop(columns=[' loan_status'])
+# holdout.drop(columns=['loan_id'], inplace=True)
 y = df[' loan_status']
 
 x = pd.get_dummies(x)
@@ -64,4 +66,4 @@ print("Accuracy on Validation:", accuracy)
 print("F1 score on Holdout:", holdout_f1)
 print("Accuracy on Holdout:", holdout_acc)
 
-
+print(holdout.head())

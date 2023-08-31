@@ -290,7 +290,7 @@
 
 |                   |DecisionTree|XGradientBoost|GaussianNB|RandomForset|KNeighbors|
 |-------------------|------------|--------------|----------|------------|----------|
-|Holdout F1 Score   |76.41       |76.16         |76.41     |00000       |73.86     |
+|Holdout F1 Score   |76.41       |76.16         |76.41     |76.37       |73.86     |
 
 
 <h4>Although I mostly used a hands-on approach, I also wanted to use GridSearchCV to get some exposure to it.</h4>

@@ -14,13 +14,16 @@ import keras_tuner as kt
 import numpy as np
 from keras.callbacks import Callback
 from keras.losses import BinaryCrossentropy
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
 
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=False, standard_scaling=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, filtered_features=True)
+
+print(x_train.head())
 
 
 def str_to_metric(string):
@@ -97,7 +100,7 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log'
+                     project_name='Hyperband_log2.0'
                      )
 
 
@@ -159,7 +162,6 @@ model = tuner.hypermodel.build(best_hps)
 model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6, steps_per_epoch=100, batch_size=32, callbacks=[lr_callback, f1_callback])
 
 
-
 # After training, compute F1 score on holdout set
 holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))
 holdout_pred = (holdout_probabilities > 0.5).astype(int)  # Apply threshold to classify
@@ -179,10 +181,15 @@ print("F1 score on Holdout:", holdout_f1)
 print("Accuracy on Holdout:", holdout_acc)
 print("--- %s seconds ---" % (time.time() - start_time))
 
+cm = confusion_matrix(holdout_true, holdout_pred)
 
 
 
 
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Rejected', 'Approved'])
+disp.plot()
+
+plt.show()
 
 
 

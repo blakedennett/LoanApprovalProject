@@ -13,7 +13,7 @@ from sklearn.model_selection import StratifiedShuffleSplit
 
 
 
-def get_preprocessed_df(with_cibil=False, standard_scaling=False):
+def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_features=False):
 
     df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dataset.csv')
 
@@ -67,6 +67,9 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False):
     if not with_cibil:
         df.drop(columns=[' cibil_score'], inplace=True)
 
+    if filtered_features:
+        df = df[[' loan_status', ' loan_income_ratio', ' loan_coll_ratio', ' cibil_score']]
+
     df = pd.get_dummies(df)
 
     holdout = df.sample(frac=0.1, random_state=42)
@@ -99,6 +102,8 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False):
     return x_train, x_test, y_train, y_test, holdout
 
 x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
+
+print(holdout[' loan_status'].value_counts())
 
 model = DecisionTreeClassifier(random_state=42)
 model.fit(x_train, y_train)
