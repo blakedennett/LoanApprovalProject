@@ -20,7 +20,7 @@ from keras.losses import BinaryCrossentropy
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=False, standard_scaling=True)
 
 
 def str_to_metric(string):
@@ -66,16 +66,18 @@ num_features = x_train.shape[1]
 def build_model(hp):
     model = Sequential()
 
-    hp_activation = hp.Choice('activation', values=['relu', 'tanh'])
+    hp_activation = hp.Choice('activation', values=['relu', 'tanh', 'selu','elu'])
 
-    for i in range(hp.Int('num_layers', 1, 4)):
+    for i in range(hp.Int('num_layers', 1, 3)):
         hp_units = hp.Int(f'layer{i+1}', min_value=15, max_value=315, step=30)
         model.add(Dense(units=hp_units, input_dim=num_features, activation=hp_activation))
-        # use hyperband to tune dropout rate
+
         hp_dropout_rate = hp.Choice(f'dropout{i+1}', values=[0.0, 0.01, 0.001, 0.0001, 0.00001])
         model.add(Dropout(rate=hp_dropout_rate))
 
-    model.add(Dense(1, activation='sigmoid'))
+    hp_output_activation = hp.Choice('output_activation', values=['softmax', 'sigmoid', 'linear'])
+
+    model.add(Dense(1, activation=hp_output_activation))
 
     metric_choice = hp.Choice('metric', values=['accuracy', 'auc', 'precision', 'recall'])
 
@@ -95,7 +97,7 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log2.0'
+                     project_name='Hyperband_log'
                      )
 
 
@@ -122,7 +124,7 @@ class F1ScoreCallback(Callback):
 
 f1_callback = F1ScoreCallback(validation_data=(x_test, y_test))
 
-tuner.search(x_train, y_train, epochs=5, steps_per_epoch=300, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
+tuner.search(x_train, y_train, epochs=5, batch_size=25, steps_per_epoch=25, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
 
 print(tuner.results_summary())
 
@@ -131,8 +133,10 @@ best_hps=tuner.get_best_hyperparameters(num_trials=1)[0]
 
 print('---------------------------------------------Best Hyperparameters------------------------------------------------')
 print(f'Number of Layers: {best_hps.get("num_layers")}')
-print(f'Learning Rate: {best_hps.get("learning_rate")}')
+print(f'Reduction: {best_hps.get("reduction")}')
+print(f'optimizer: {best_hps.get("optimizer")}')
 print(f'Activation: {best_hps.get("activation")}')
+print(f'Output_Activation: {best_hps.get("output_activation")}')
 print(f'Metric: {best_hps.get("metric")}')
 for i in range(best_hps.get("num_layers")):
     print(f'Units in Layer {i+1}: {best_hps.get("layer"+str(i+1))}')
@@ -152,7 +156,7 @@ print('-----------------------------------------------Best epoch: %d------------
 model = tuner.hypermodel.build(best_hps)
 
 # Retrain the model
-model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=5, steps_per_epoch=100, batch_size=32, callbacks=[lr_callback, f1_callback])
+model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6, steps_per_epoch=100, batch_size=32, callbacks=[lr_callback, f1_callback])
 
 
 

@@ -54,7 +54,7 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 for i in range(1):
     start_time = time.time()
 
-    history = model.fit(x_train, y_train, epochs=6, batch_size=16, steps_per_epoch=25, validation_data=(x_test, y_test), verbose=1, callbacks=[lr_callback])
+    history = model.fit(x_train, y_train, epochs=6, batch_size=25, steps_per_epoch=25, validation_data=(x_test, y_test), verbose=1, callbacks=[lr_callback])
 
 
     holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))

@@ -38,7 +38,7 @@ num_features = x_train.shape[1]
 
 model = Sequential()
 
-model.add(Dense(units=315, input_dim=num_features, activation='tanh'))
+model.add(Dense(units=315, input_dim=num_features, activation='elu'))
 
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss=BinaryCrossentropy(reduction='none'), optimizer=Ftrl(), metrics=['accuracy'])

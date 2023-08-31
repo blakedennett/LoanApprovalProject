@@ -374,24 +374,21 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 
 #### Steps per epoch & Batch Size
 
-<h4>I had to manually find the best value for these parameters. Therefore, what I did was run a loop from 1 to 500 with a step of 50. I didn't find hardly any change in the results of the model, therefore, I chose the best number according to speed, which was 25 at about 0.75 seconds for the steps per epoch, and 450 at 0.68 seconds for the batch size.</h4>
+<h4>I had to manually find the best value for these parameters. Therefore, what I did was run a loop from 1 to 500 with a step of 50. I didn't find hardly any change in the results of the model, therefore, I chose the best number according to speed, which was 25 at about 0.75 seconds for the steps per epoch, and 450 at 0.68 seconds for the batch size. (except I found that the batch size can't be bigger than the number of epochs times the steps, so I had to bring it down.)</h4>
 
 ### Final Hyperparameters
-
-<h4>Number of Layers: 4</h4>
-<h4>Number of Neurons in Each Layer: 255, 105, 195, 15</h4>
-<h4>Dropout Rate in Each Layer: 0.01, 0.01, 0, 0</h4>
-<h4>Activation Function: relu</h4>
-<h4>Learning Rate: 0.1</h4>
-<h4>Epochs: 1</h4>
-
-##### With Cibil Score
-<h4>Number of Layers: 4</h4>
-<h4>Number of Neurons in Each Layer: 255, 105, 195, 15</h4>
-<h4>Dropout Rate in Each Layer: 0.01, 0.01, 0, 0</h4>
-<h4>Activation Function: relu</h4>
-<h4>Learning Rate: 0.1</h4>
-<h4>Epochs: 1</h4>
+<h4>Number of Layers: 3</h4>
+<h4>optimizer: rmsprop</h4>
+<h4>Activation: relu</h4>
+<h4>Reduction: auto</h4>
+<h4>Output_Activation: softmax</h4>
+<h4>Metric: precision</h4>
+<h4>Units in Layer 1: 45</h4>
+<h4>Dropout Rate in Layer 1: 0.0</h4>
+<h4>Units in Layer 2: 255</h4>
+<h4>Dropout Rate in Layer 2: 0.0001</h4>
+<h4>Units in Layer 3: 165</h4>
+<h4>Dropout Rate in Layer 3: 0.01</h4>
 
 ### Results and Metrics
 
