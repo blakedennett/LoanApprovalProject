@@ -3,7 +3,7 @@ import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
-from keras.optimizers import Adam
+from keras.optimizers import Adam, SGD, RMSprop, Adadelta, Adagrad, Adamax, Nadam, Ftrl, Optimizer, Adafactor, Lion, AdamW
 from keras.callbacks import LearningRateScheduler
 import math
 from sklearn.metrics import f1_score, accuracy_score
@@ -13,6 +13,7 @@ from sklearn.model_selection import GridSearchCV
 import keras_tuner as kt
 import numpy as np
 from keras.callbacks import Callback
+from keras.losses import BinaryCrossentropy
 
 
 
@@ -22,7 +23,7 @@ start_time = time.time()
 x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True)
 
 
-def str_to_object(string):
+def str_to_metric(string):
     if string == 'auc':
         return AUC()
     elif string == 'precision':
@@ -31,6 +32,33 @@ def str_to_object(string):
         return Recall()
     else:
         return string
+    
+def str_to_optimizer(string):
+    if string == 'adam':
+        return Adam()
+    elif string == 'sgd':
+        return SGD()
+    elif string == 'rmsprop':
+        return RMSprop()
+    elif string == 'Adadelta':
+        return Adadelta()
+    elif string == 'Adafactor':
+        return Adafactor()
+    elif string == 'Adagrad':
+        return Adagrad()
+    elif string == 'Adamax':
+        return Adamax()
+    elif string == 'Nadam':
+        return Nadam()
+    elif string == 'Ftrl':
+        return Ftrl()
+    elif string == 'AdamW':
+        return AdamW()
+    elif string == 'Lion':
+        return Lion()
+    elif string == 'Optimizer':
+        return Optimizer()
+    
 
 
 num_features = x_train.shape[1]
@@ -38,7 +66,7 @@ num_features = x_train.shape[1]
 def build_model(hp):
     model = Sequential()
 
-    hp_activation = hp.Choice('activation', values=['relu', 'tanh', 'sigmoid'])
+    hp_activation = hp.Choice('activation', values=['relu', 'tanh'])
 
     for i in range(hp.Int('num_layers', 1, 4)):
         hp_units = hp.Int(f'layer{i+1}', min_value=15, max_value=315, step=30)
@@ -51,10 +79,14 @@ def build_model(hp):
 
     metric_choice = hp.Choice('metric', values=['accuracy', 'auc', 'precision', 'recall'])
 
-    metric_to_use = str_to_object(metric_choice)
+    metric_to_use = str_to_metric(metric_choice)
+
+    hp_optimizer = hp.Choice('optimizer', values=['adam', 'sgd', 'rmsprop', 'Adadelta', 'Adafactor', 'Adagrad', 'Adamax', 'Nadam', 'Ftrl', 'AdamW', 'Lion', 'Optimizer'])
+    hp_reduction = hp.Choice('reduction', values=['sum', 'sum_over_batch_size', 'auto', 'none'])
 
     hp_learning_rate = hp.Choice('learning_rate', values=[0.1, 0.01, 0.001, 0.0001, 0.00001])
-    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=hp_learning_rate), metrics=[metric_to_use])
+
+    model.compile(loss=BinaryCrossentropy(reduction=hp_reduction), optimizer=str_to_optimizer(hp_optimizer), metrics=[metric_to_use])
 
     return model
 

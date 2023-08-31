@@ -13,6 +13,10 @@ from sklearn.model_selection import GridSearchCV
 import keras_tuner as kt
 import numpy as np
 from keras.callbacks import Callback
+from keras.losses import CategoricalCrossentropy
+from keras.losses import BinaryCrossentropy
+import tensorflow_addons as tfa
+from tensorflow_addons.losses import SigmoidFocalCrossEntropy
 import shap
 import time
 
@@ -37,7 +41,7 @@ model.add(Dropout(rate=0.0001))
 
 model.add(Dense(1, activation='sigmoid'))
 
-model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=[AUC()])
+model.compile(loss=BinaryCrossentropy(reduction='auto'), optimizer='rmsprop', metrics=[AUC()])
 
 def lr_schedule(epoch, lr):
         initial_learning_rate = .1

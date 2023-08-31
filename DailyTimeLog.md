@@ -154,14 +154,18 @@
 * trying new scratch network
 
 ### Day 31
+* optimizer
+* loss
+* reduction
+
+### Day 32
 *
-*
-*
-*
+
 
 ---------------------------------------------- future notes ----------------------------------------------
 cross validation
 epoch loop
 learning rate parameter loop 
 optimizers
-loss functions
+talk about confusion matrix 
+thresholds
