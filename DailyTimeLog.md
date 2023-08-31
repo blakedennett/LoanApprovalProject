@@ -159,7 +159,9 @@
 * reduction
 
 ### Day 32
-*
+* new activation functions
+* batch size / steps per epoch adjustments
+* 
 
 
 ---------------------------------------------- future notes ----------------------------------------------

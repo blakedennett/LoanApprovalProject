@@ -33,7 +33,7 @@
 
 * #### Decision Tree Summary 
 
-<h4>The third part of my project was machine learning. This took two weeks (36 hours). I used five different types of decision trees and had the hyperparameters randomly selected in an infinite while loop with each type running in parrellel. The results were written to a file when a new best score was found. This took a bit of manual changes and a lot of cpu time but it yeilded great results.</h4>
+<h4>The third part of my project was machine learning. This took two weeks (36 hours). I used five different types of decision trees and had the hyperparameters randomly selected in an infinite while loop with each type running in parallel. The results were written to a file when a new best score was found. This took a bit of manual changes and a lot of cpu time but it yielded great results.</h4>
 
 * #### Neural Network Summary
 
@@ -143,7 +143,7 @@
 
 ### Outliers
 
-<h4>I looked into the numerical features for any values high or lower than three standard deviations from the average. There were 33 total that were above the upper limit and none below the lower. The values were split among the residential and commercial assets. I decided to take the values down to simply equal the upper limit. Additionally, I wanted to try something I hadn't done which came from a package called winsorize. This basically does the same thing by taking values above and below a certain percentage (0.01 or 0.99) and caps them to the limit.</h4>
+<h4>I looked into the numerical features for any values high or lower than three standard deviations from the average. There were 33 total that were above the upper limit and none below the lower. The values were split among the residential and commercial assets. I decided to take the values down to simply equal the upper limit. Additionally, I wanted to try something I hadn't done which came from a package called Winsorize. This basically does the same thing by taking values above and below a certain percentage (0.01 or 0.99) and caps them to the limit.</h4>
 
 ### Negative Values
 
@@ -178,7 +178,7 @@
 |Credit Score         |711       |429       |282       |
 |Income               |5,000,000 |5,100,000 |-100,000  |
 |Loan Amount          |14,600,000|14,500,000|100,000   |
-|Total Colateral      |31,000,000|31,900,000|-900,000  |
+|Total Collateral     |31,000,000|31,900,000|-900,000  |
 |Loan Collateral Ratio|0.473     |0.457     |0.016     |
 |Income to Loan Ratio |3.05      |2.88      |0.175     |
 |Dependents           |2.5       |3         |-0.5      |
@@ -191,7 +191,7 @@
 
 ### Correlation and P-Values
 
-<h4>Because the Cibil score seems to be such a primary tool to determine whether a loan is approved, I decided to compare every other numerical feature to it. I used a method called pearsonr from the scipy.stats package. This gave me the correlation and p-value between each feature and the Cibil score. Ultimately, there was very little correlation and each p-value was well above 0.05.</h4>
+<h4>Because the Cibil score seems to be such a primary tool to determine whether a loan is approved, I decided to compare every other numerical feature to it. I used a method called Pearsonr from the scipy.stats package. This gave me the correlation and p-value between each feature and the Cibil score. Ultimately, there was very little correlation and each p-value was well above 0.05.</h4>
 
 #### Comparison to Credit Score
 
@@ -231,7 +231,7 @@
 
 <h4>First, I took all of the data cleaning that I had done in the analysis file and applied them to the preprocessing file. Then I added the new features I had created. With this step, I also added a few new columns through multiplying a few columns by others. The idea here is for the decision tree models to see more into the correlations between different features.</h4>
 
-<h4>For the nueral network specifically, I used standard scaling, making numerical features go from 0 to 1 to optimize training time (bigger numbers mean more computationally expensive).</h4>
+<h4>For the neural network specifically, I used standard scaling, making numerical features go from 0 to 1 to optimize training time (bigger numbers mean more computationally expensive).</h4>
 
 <h4>In order to handle numeric, categorical features, I used an sklearn, preprocessing package called OrdinalEncoder. This was primarily relevant for the "loan_id" column. I found that this was better than expanding the column into multiple (loan_id_1001, loan_id_1002, etc) as I had previously done.</h4>
 
@@ -314,7 +314,7 @@
 
 ### Overview
 
-<h4>To build my Neural Network, I used Tensorflow to build a model from sratch. Because the dataset was small, I was able to run it on my laptop with a CPU and it only took about 8 seconds (without any tuning). I decided not to do the random, manual hyperparameter adjustments her like I did with the decision tree models. Instead, I ended up using the Keras tuner called Hyperband. I originally tried GridSearchCV, but I fortunately got very stuck and found something much better and more efficient anyways. Overall, I was disappointed with the results I got, but ultimately I learned a lot and am very happy with the neural network I built.</h4>
+<h4>To build my Neural Network, I used Tensorflow to build a model from scratch. Because the dataset was small, I was able to run it on my laptop with a CPU and it only took about 8 seconds (without any tuning). I decided not to do the random, manual hyperparameter adjustments her like I did with the decision tree models. Instead, I ended up using the Keras tuner called Hyperband. I originally tried GridSearchCV, but I fortunately got very stuck and found something much better and more efficient anyways. Overall, I was disappointed with the results I got, but ultimately I learned a lot and am very happy with the neural network I built.</h4>
 
 ### Keras Hyperband Tuner
 
@@ -374,7 +374,7 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 
 #### Steps per epoch & Batch Size
 
-<h4>I had to manually find the best value for these parameters. Therefore, what I did was run a loop from 1 to 500 with a step of 50. I didn't find hardly any change in the results of the model, therefore, I chose the best number according to speed, which was 25 at about 0.75 seconds for the steps per epoch, and 450 at 0.68 seconds for the batch size. (except I found that the batch size can't be bigger than the number of epochs times the steps, so I had to bring it down.)</h4>
+<h4>I had to manually find the best value for these parameters. Therefore, what I did was run a loop from 1 to 500 with a step of 50. I didn't find hardly any change in the results of the model; therefore, I chose the best number according to speed, which was 25 at about 0.75 seconds for the steps per epoch, and 450 at 0.68 seconds for the batch size. (except I found that the batch size can't be bigger than the number of epochs times the steps, so I had to bring it down.)</h4>
 
 ### Final Hyperparameters
 <h4>Number of Layers: 3</h4>
@@ -399,6 +399,3 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 |Validation Accuracy|62.76              |62.88       |
 |Holdout Accuracy   |61.83              |62.06       |
 
-
-
-## Acknowledgments

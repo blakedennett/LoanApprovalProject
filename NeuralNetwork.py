@@ -106,7 +106,7 @@ stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
 def lr_schedule(epoch, lr):
     initial_learning_rate = .01
     decay_rate = 0.90
-    epoch_rate = 2
+    epoch_rate = 1
     return initial_learning_rate * math.pow(decay_rate, math.floor(epoch/epoch_rate))
 
 lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
@@ -124,7 +124,7 @@ class F1ScoreCallback(Callback):
 
 f1_callback = F1ScoreCallback(validation_data=(x_test, y_test))
 
-tuner.search(x_train, y_train, epochs=5, batch_size=25, steps_per_epoch=25, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
+tuner.search(x_train, y_train, epochs=6, batch_size=25, steps_per_epoch=25, validation_data=(x_test, y_test), callbacks=[stop_early, lr_callback, f1_callback])
 
 print(tuner.results_summary())
 
