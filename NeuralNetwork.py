@@ -21,8 +21,11 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, filtered_features=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, filtered_features=False)
 
+x_train = x_train[' cibil_score']
+x_test = x_test[' cibil_score']
+holdout = holdout[' cibil_score']
 
 def str_to_metric(string):
     if string == 'auc':
