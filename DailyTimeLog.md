@@ -161,7 +161,12 @@
 ### Day 32
 * new activation functions
 * batch size / steps per epoch adjustments
-* 
+* confusion matrix
+
+### Day 33
+* numpy to tensor issue
+* duplicating the rejections
+* preproccessing bugs
 
 
 ---------------------------------------------- future notes ----------------------------------------------

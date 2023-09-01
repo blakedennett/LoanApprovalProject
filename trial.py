@@ -66,4 +66,6 @@ print("Accuracy on Validation:", accuracy)
 print("F1 score on Holdout:", holdout_f1)
 print("Accuracy on Holdout:", holdout_acc)
 
-print(holdout.head())
+# print(holdout.head())
+# print(x_train.head())
+# print(x_test.head())

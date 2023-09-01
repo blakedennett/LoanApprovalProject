@@ -9,11 +9,11 @@ from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 from scipy.stats.mstats import winsorize
 from sklearn.model_selection import StratifiedShuffleSplit
+from imblearn.over_sampling import SMOTE
 
 
 
-
-def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_features=False):
+def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_features=False, duplicate_rejects=False):
 
     df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dataset.csv')
 
@@ -92,6 +92,39 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_featu
     x_test = test_data.drop(columns=[' loan_status'])
     y_test = test_data[' loan_status']
 
+    def duplicate_rejects(x_train, y_train):
+
+        def combine(dat1, dat2):
+            return pd.concat([dat1, dat2])
+
+        # isolate the rejects data
+        rejects_df = y_train[y_train == 0]
+
+        # combine the original with the duplicates
+        y_train = combine(y_train, rejects_df)
+
+        rejects_dict = {}
+
+        # get indices from x_train rejects values
+        rej_indices = list(rejects_df.index.values.tolist())
+
+        # iterate through x_train, if it is a rejects index, add it to rejects dictionary
+        for row in x_train.iterrows():
+            if row[0] in rej_indices:
+                # add row to dictionary
+                rejects_dict[row[0]] = row[1]
+
+        # turn the dictionary into a series
+        x_rej_ser = pd.Series(rejects_dict)
+
+        # combine the original with the duplicates
+        x_train = combine(x_train, x_rej_ser)
+
+        return x_train, y_train
+
+    if duplicate_rejects:
+        x_train, y_train = duplicate_rejects(x_train, y_train)
+
 
     if standard_scaling:
         numerical_cols = df.select_dtypes(include=['float64', 'int64']).columns
@@ -102,25 +135,31 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_featu
 
     return x_train, x_test, y_train, y_test, holdout
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, filtered_features=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, duplicate_rejects=True)
 
-model = DecisionTreeClassifier(random_state=42)
-model.fit(x_train, y_train)
+# print(y_train.head())
 
-feat_importances = pd.DataFrame(model.feature_importances_, index=x_train.columns, columns=["Importance"])
-feat_importances.sort_values(by='Importance', ascending=False, inplace=True)
 
-# Create the bar chart using Matplotlib
-plt.figure(figsize=(8, 6))
-plt.bar(feat_importances.index, feat_importances['Importance'], color='#21EB2B')
-plt.xlabel('Features')
-plt.ylabel('Importance')
-plt.title('Feature Importances')
-plt.xticks(rotation=45, ha='right')
-plt.tight_layout()
 
-def main():
-    plt.show()
+print(x_train.dtypes)
+# print(y_train.dtypes)
+# model = DecisionTreeClassifier(random_state=42)
+# model.fit(x_train, y_train)
 
-if __name__ == '__main__':
-    main()
+# feat_importances = pd.DataFrame(model.feature_importances_, index=x_train.columns, columns=["Importance"])
+# feat_importances.sort_values(by='Importance', ascending=False, inplace=True)
+
+# # Create the bar chart using Matplotlib
+# plt.figure(figsize=(8, 6))
+# plt.bar(feat_importances.index, feat_importances['Importance'], color='#21EB2B')
+# plt.xlabel('Features')
+# plt.ylabel('Importance')
+# plt.title('Feature Importances')
+# plt.xticks(rotation=45, ha='right')
+# plt.tight_layout()
+
+# def main():
+#     plt.show()
+
+# if __name__ == '__main__':
+#     main()

@@ -24,9 +24,11 @@ import time
 
 
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=False, standard_scaling=False, duplicate_rejects=False)
 
 num_features = x_train.shape[1]
+
+# print(x_train.head())
 
 model = Sequential()
 
@@ -54,7 +56,7 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 for i in range(1):
     start_time = time.time()
 
-    history = model.fit(x_train, y_train, epochs=6, batch_size=25, steps_per_epoch=25, validation_data=(x_test, y_test), verbose=1, callbacks=[lr_callback])
+    history = model.fit(x_train, y_train, epochs=60, batch_size=25, steps_per_epoch=25, validation_data=(x_test, y_test), verbose=1, callbacks=[lr_callback])
 
 
     holdout_probabilities = model.predict(holdout.drop(columns=[' loan_status']))
@@ -76,21 +78,6 @@ for i in range(1):
     print(f'num steps: {i}')
     print("--- %s seconds ---" % (time.time() - start_time))
 
-# plot loss during training
-plt.subplot(211)
-plt.title('Loss')
-plt.plot(history.history['loss'], label='train')
-plt.plot(history.history['val_loss'], label='validation')
-plt.legend()
-# plt.show()
-
-# plot accuracy during training
-plt.subplot(212)
-plt.title('Accuracy')
-plt.plot(history.history['accuracy'], label='train')
-plt.plot(history.history['val_accuracy'], label='validation')
-plt.legend()
-# plt.show()
 
 
 # sample_size = int(0.1 * len(x_test))

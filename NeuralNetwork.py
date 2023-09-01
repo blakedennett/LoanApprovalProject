@@ -21,11 +21,11 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, filtered_features=False)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, duplicate_rejects=True)
 
-x_train = x_train[' cibil_score']
-x_test = x_test[' cibil_score']
-holdout = holdout[' cibil_score']
+# x_train = x_train[[' loan_income_ratio', ' loan_coll_ratio', ' cibil_score']]
+# x_test = x_test[[' cibil_score', ' loan_income_ratio', ' loan_coll_ratio']]
+# holdout = holdout[[' cibil_score', ' loan_income_ratio', ' loan_coll_ratio', ' loan_status']]
 
 def str_to_metric(string):
     if string == 'auc':
@@ -101,7 +101,7 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log2.0'
+                     project_name='Hyperband_log'
                      )
 
 
