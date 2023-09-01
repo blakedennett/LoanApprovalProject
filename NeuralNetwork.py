@@ -23,8 +23,6 @@ start_time = time.time()
 
 x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, filtered_features=True)
 
-print(x_train.head())
-
 
 def str_to_metric(string):
     if string == 'auc':

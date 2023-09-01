@@ -70,7 +70,8 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_featu
     if filtered_features:
         df = df[[' loan_status', ' loan_income_ratio', ' loan_coll_ratio', ' cibil_score']]
 
-    df = pd.get_dummies(df)
+    if not filtered_features:
+        df = pd.get_dummies(df)
 
     holdout = df.sample(frac=0.1, random_state=42)
 
@@ -101,9 +102,7 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_featu
 
     return x_train, x_test, y_train, y_test, holdout
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df()
-
-print(holdout[' loan_status'].value_counts())
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, filtered_features=True)
 
 model = DecisionTreeClassifier(random_state=42)
 model.fit(x_train, y_train)
