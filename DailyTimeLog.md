@@ -168,6 +168,11 @@
 * duplicating the rejections
 * preproccessing bugs
 
+### Day 34
+* confusion matrix
+* final tree bugs
+* finished README file
+
 
 ---------------------------------------------- future notes ----------------------------------------------
 cross validation

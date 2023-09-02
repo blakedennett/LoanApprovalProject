@@ -235,6 +235,8 @@
 
 <h4>In order to handle numeric, categorical features, I used an sklearn, preprocessing package called OrdinalEncoder. This was primarily relevant for the "loan_id" column. I found that this was better than expanding the column into multiple (loan_id_1001, loan_id_1002, etc) as I had previously done.</h4>
 
+<h4>One issue I was finding with my Neural Network was that it had the tendency to simply approve every loan and still get a decent score. What I did to fix this was to oversample the cases of the rejections in the training data. This allowed a higher priority on rejecting poor applications.</h4>
+
 <h4> Following this, I made a holdout set that represented 10% of the total data. Lastly, I did an 80/20 training and testing split. Overall, it was a 70% for training, 20% for validation, and 10% for the final testing. Additionally, I decided to do a stratified shuffle split. The purpose of this was to make the training, validation, and holdout data each have the same or similar distributions.</h4>
 
 ### Feature Importance
@@ -401,8 +403,8 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 
 ### Confusion Matrix On the Holdout Dataset
 
-<img src="./images/IncomeDependentGraph.PNG" alt="Income Dependent Graph">
+<img src="./images/ConfusionMatrix.PNG" alt="Confusion Matrix">
 
 
-<h4></h4>
+<h4>Looking at the graph, there were forty incorrect predictions in the data. 20 should have been rejected and 20 should have been approved. I was glad that I included the confusion matrix because I found some major insights into some errors I was having with performance. My only regret was not including this earlier in the project.</h4>
 

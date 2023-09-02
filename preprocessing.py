@@ -123,77 +123,14 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_featu
         x_test[numerical_cols] = scaler.transform(x_test[numerical_cols])
         holdout[numerical_cols] = scaler.transform(holdout[numerical_cols])
 
-    # x_train.drop(columns=[0], inplace=True)
-
     return x_train, x_test, y_train, y_test, holdout
 
 x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, reject_oversample=True)
 
-# print(x_train.head())
 
-
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, reject_oversample=False)
-
-
-# print(x_train.head())
-
-
-
-# print(x_train.dtypes)
-# print(y_train.dtypes)
-# model = DecisionTreeClassifier(random_state=42)
-# model.fit(x_train, y_train)
-
-# feat_importances = pd.DataFrame(model.feature_importances_, index=x_train.columns, columns=["Importance"])
-# feat_importances.sort_values(by='Importance', ascending=False, inplace=True)
-
-# # Create the bar chart using Matplotlib
-# plt.figure(figsize=(8, 6))
-# plt.bar(feat_importances.index, feat_importances['Importance'], color='#21EB2B')
-# plt.xlabel('Features')
-# plt.ylabel('Importance')
-# plt.title('Feature Importances')
-# plt.xticks(rotation=45, ha='right')
-# plt.tight_layout()
 
 # def main():
 #     plt.show()
 
 # if __name__ == '__main__':
 #     main()
-
-
-def duplicate_rejects(x_train, y_train):
-
-        def combine(dat1, dat2):
-            return pd.concat([dat1, dat2])
-
-        # isolate the rejects data
-        rejects_df = y_train[y_train == 0]
-
-        # combine the original with the duplicates
-        y_train = combine(y_train, rejects_df)
-
-        rejects_dict = {}
-
-        # get indices from x_train rejects values
-        rej_indices = list(rejects_df.index.values.tolist())
-
-        # iterate through x_train, if it is a rejects index, add it to rejects dictionary
-        for row in x_train.iterrows():
-            if row[0] in rej_indices:
-                # add row to dictionary
-                rejects_dict[row[0]] = row[1]
-
-        # turn the dictionary into a series
-        x_rej_ser = pd.Series(rejects_dict)
-
-        # combine the original with the duplicates
-        x_train = combine(x_train, x_rej_ser)
-
-        x_train.drop(columns=[0], inplace=True)
-
-        return x_train, y_train
-
-    # if reject_oversample:
-    #     x_train, y_train = duplicate_rejects(x_train, y_train)

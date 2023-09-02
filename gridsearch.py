@@ -121,7 +121,7 @@ hyperparameters = {
 
 rfc = RandomForestClassifier()
 
-run_gridsearch(rfc, hyperparameters)
+# run_gridsearch(rfc, hyperparameters)
 
 
 # Best parameters:
