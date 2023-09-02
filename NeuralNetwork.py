@@ -101,7 +101,7 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log2.0'
+                     project_name='Hyperband_log'
                      )
 
 
@@ -160,7 +160,7 @@ print('-----------------------------------------------Best epoch: %d------------
 model = tuner.hypermodel.build(best_hps)
 
 # Retrain the model
-model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6, steps_per_epoch=100, batch_size=32, callbacks=[lr_callback, f1_callback])
+model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=6, steps_per_epoch=25, batch_size=16, callbacks=[lr_callback, f1_callback])
 
 
 # After training, compute F1 score on holdout set
