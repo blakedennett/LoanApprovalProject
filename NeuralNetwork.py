@@ -21,11 +21,11 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import time
 start_time = time.time()
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, duplicate_rejects=True)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, standard_scaling=True, reject_oversample=True)
 
-# x_train = x_train[[' loan_income_ratio', ' loan_coll_ratio', ' cibil_score']]
-# x_test = x_test[[' cibil_score', ' loan_income_ratio', ' loan_coll_ratio']]
-# holdout = holdout[[' cibil_score', ' loan_income_ratio', ' loan_coll_ratio', ' loan_status']]
+x_train = x_train[[' loan_income_ratio', ' loan_coll_ratio', ' cibil_score']]
+x_test = x_test[[' cibil_score', ' loan_income_ratio', ' loan_coll_ratio']]
+holdout = holdout[[' cibil_score', ' loan_income_ratio', ' loan_coll_ratio', ' loan_status']]
 
 def str_to_metric(string):
     if string == 'auc':
@@ -101,7 +101,7 @@ tuner = kt.Hyperband(build_model,
                      objective='val_loss',
                      max_epochs=20,
                      factor=3,
-                     project_name='Hyperband_log'
+                     project_name='Hyperband_log2.0'
                      )
 
 
@@ -181,63 +181,3 @@ print("Accuracy on Validation:", accuracy)
 print("F1 score on Holdout:", holdout_f1)
 print("Accuracy on Holdout:", holdout_acc)
 print("--- %s seconds ---" % (time.time() - start_time))
-
-cm = confusion_matrix(holdout_true, holdout_pred)
-
-
-
-
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Rejected', 'Approved'])
-disp.plot()
-
-plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Plot loss
-# plt.clf()
-# plt.subplot(211)
-# plt.title('Loss')
-# plt.plot(history.history['loss'], label='train')
-# plt.plot(history.history['val_loss'], label='test')
-# plt.legend()
-# plt.show()

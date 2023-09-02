@@ -24,7 +24,7 @@ import time
 
 
 
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=False, standard_scaling=False, duplicate_rejects=False)
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=False, standard_scaling=False, duplicate_rejects=True)
 
 num_features = x_train.shape[1]
 

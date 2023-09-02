@@ -394,8 +394,15 @@ lr_callback = LearningRateScheduler(lr_schedule, verbose=1)
 
 |                   |Without Cibil Score|Including   |
 |-------------------|-------------------|------------|
-|Validation F1      |77.12              |77.18       |
-|Holdout F1         |76.41              |76.52       |
-|Validation Accuracy|62.76              |62.88       |
-|Holdout Accuracy   |61.83              |62.06       |
+|Validation F1      |77.12              |92.28       |
+|Holdout F1         |76.41              |90.25       |
+|Validation Accuracy|62.76              |92.42       |
+|Holdout Accuracy   |61.83              |90.63       |
+
+### Confusion Matrix On the Holdout Dataset
+
+<img src="./images/IncomeDependentGraph.PNG" alt="Income Dependent Graph">
+
+
+<h4></h4>
 

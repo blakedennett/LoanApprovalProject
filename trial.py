@@ -2,19 +2,28 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense
-from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
+from sklearn.metrics import f1_score, accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 from keras.losses import CategoricalCrossentropy, SparseCategoricalCrossentropy, BinaryCrossentropy
 import tensorflow as tf
 from keras.optimizers import Adam, Ftrl
 from keras.metrics import AUC
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dataset.csv')
 
+collateral_df = df[[' residential_assets_value',  ' commercial_assets_value', ' bank_asset_value', ' luxury_assets_value']]
+
 df[' loan_status'] = np.where(df[' loan_status'] == " Approved", 1, 0)
 
-df = df[[' loan_status', ' cibil_score']]
+df[' total_collateral'] = collateral_df.apply(lambda x: x.sum(), axis=1)
+
+df[' loan_coll_ratio'] = df[' loan_amount'] / df[' total_collateral']
+
+df[' loan_income_ratio'] = df[' loan_amount'] / df[' income_annum']
+
+df = df[[' loan_status', ' cibil_score', ' loan_income_ratio', ' loan_coll_ratio']]
 
 holdout = df.sample(frac=0.1, random_state=42)
 df.drop(holdout.index, inplace=True)
@@ -34,6 +43,7 @@ holdout = pd.get_dummies(holdout)
 
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=2)
+
 
 
 num_features = x_train.shape[1]
@@ -69,3 +79,10 @@ print("Accuracy on Holdout:", holdout_acc)
 # print(holdout.head())
 # print(x_train.head())
 # print(x_test.head())
+
+cm = confusion_matrix(holdout_true, holdout_pred)
+
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['Rejected', 'Approved'])
+disp.plot()
+
+plt.show()

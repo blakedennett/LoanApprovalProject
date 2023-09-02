@@ -13,7 +13,7 @@ from imblearn.over_sampling import SMOTE
 
 
 
-def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_features=False, duplicate_rejects=False):
+def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_features=False, reject_oversample=False):
 
     df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dataset.csv')
 
@@ -92,7 +92,78 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_featu
     x_test = test_data.drop(columns=[' loan_status'])
     y_test = test_data[' loan_status']
 
-    def duplicate_rejects(x_train, y_train):
+    
+    if reject_oversample:
+        # Identify the 'rejected' samples in the training data
+        rejected_indices = train_data[train_data[' loan_status'] == 0].index
+
+        # Randomly sample some of the 'rejected' samples to oversample
+        oversampled_indices = np.random.choice(rejected_indices, size=len(rejected_indices), replace=True)
+
+        # Create a new DataFrame with the oversampled 'rejected' samples
+        oversampled_data = df.iloc[oversampled_indices]
+
+        # Concatenate the oversampled 'rejected' samples with the original training data
+        train_data = pd.concat([train_data, oversampled_data])
+
+        # Shuffle the training data to ensure randomness
+        train_data = train_data.sample(frac=1, random_state=42)
+
+        # Update x_train and y_train
+        x_train = train_data.drop(columns=[' loan_status'])
+        y_train = train_data[' loan_status']
+
+
+
+
+    if standard_scaling:
+        numerical_cols = df.select_dtypes(include=['float64', 'int64']).columns
+        scaler = StandardScaler()
+        x_train[numerical_cols] = scaler.fit_transform(x_train[numerical_cols])
+        x_test[numerical_cols] = scaler.transform(x_test[numerical_cols])
+        holdout[numerical_cols] = scaler.transform(holdout[numerical_cols])
+
+    # x_train.drop(columns=[0], inplace=True)
+
+    return x_train, x_test, y_train, y_test, holdout
+
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, reject_oversample=True)
+
+# print(x_train.head())
+
+
+x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, reject_oversample=False)
+
+
+# print(x_train.head())
+
+
+
+# print(x_train.dtypes)
+# print(y_train.dtypes)
+# model = DecisionTreeClassifier(random_state=42)
+# model.fit(x_train, y_train)
+
+# feat_importances = pd.DataFrame(model.feature_importances_, index=x_train.columns, columns=["Importance"])
+# feat_importances.sort_values(by='Importance', ascending=False, inplace=True)
+
+# # Create the bar chart using Matplotlib
+# plt.figure(figsize=(8, 6))
+# plt.bar(feat_importances.index, feat_importances['Importance'], color='#21EB2B')
+# plt.xlabel('Features')
+# plt.ylabel('Importance')
+# plt.title('Feature Importances')
+# plt.xticks(rotation=45, ha='right')
+# plt.tight_layout()
+
+# def main():
+#     plt.show()
+
+# if __name__ == '__main__':
+#     main()
+
+
+def duplicate_rejects(x_train, y_train):
 
         def combine(dat1, dat2):
             return pd.concat([dat1, dat2])
@@ -120,46 +191,9 @@ def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_featu
         # combine the original with the duplicates
         x_train = combine(x_train, x_rej_ser)
 
+        x_train.drop(columns=[0], inplace=True)
+
         return x_train, y_train
 
-    if duplicate_rejects:
-        x_train, y_train = duplicate_rejects(x_train, y_train)
-
-
-    if standard_scaling:
-        numerical_cols = df.select_dtypes(include=['float64', 'int64']).columns
-        scaler = StandardScaler()
-        x_train[numerical_cols] = scaler.fit_transform(x_train[numerical_cols])
-        x_test[numerical_cols] = scaler.transform(x_test[numerical_cols])
-        holdout[numerical_cols] = scaler.transform(holdout[numerical_cols])
-
-    return x_train, x_test, y_train, y_test, holdout
-
-x_train, x_test, y_train, y_test, holdout = get_preprocessed_df(with_cibil=True, duplicate_rejects=True)
-
-# print(y_train.head())
-
-
-
-print(x_train.dtypes)
-# print(y_train.dtypes)
-# model = DecisionTreeClassifier(random_state=42)
-# model.fit(x_train, y_train)
-
-# feat_importances = pd.DataFrame(model.feature_importances_, index=x_train.columns, columns=["Importance"])
-# feat_importances.sort_values(by='Importance', ascending=False, inplace=True)
-
-# # Create the bar chart using Matplotlib
-# plt.figure(figsize=(8, 6))
-# plt.bar(feat_importances.index, feat_importances['Importance'], color='#21EB2B')
-# plt.xlabel('Features')
-# plt.ylabel('Importance')
-# plt.title('Feature Importances')
-# plt.xticks(rotation=45, ha='right')
-# plt.tight_layout()
-
-# def main():
-#     plt.show()
-
-# if __name__ == '__main__':
-#     main()
+    # if reject_oversample:
+    #     x_train, y_train = duplicate_rejects(x_train, y_train)
