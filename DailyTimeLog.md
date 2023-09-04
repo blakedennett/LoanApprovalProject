@@ -165,7 +165,7 @@
 
 ### Day 33
 * numpy to tensor issue
-* duplicating the rejections
+* rejection oversampling
 * preproccessing bugs
 
 ### Day 34
