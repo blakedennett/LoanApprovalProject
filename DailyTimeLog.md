@@ -173,6 +173,11 @@
 * final tree bugs
 * finished README file
 
+### Day 35
+* finding dataset
+* searching census data (40)
+* 
+
 
 ---------------------------------------------- future notes ----------------------------------------------
 cross validation
