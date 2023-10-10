@@ -175,8 +175,11 @@
 
 ### Day 35
 * finding dataset
-* searching census data (40)
-* 
+* searching census data
+* github issues
+
+### Day 36
+* shrinking file (22) 10:26
 
 
 ---------------------------------------------- future notes ----------------------------------------------

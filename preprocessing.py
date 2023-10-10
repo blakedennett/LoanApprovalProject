@@ -15,7 +15,7 @@ from imblearn.over_sampling import SMOTE
 
 def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_features=False, reject_oversample=False):
 
-    df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\loan_approval_dataset.csv')
+    df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\data\loan_approval_dataset.csv')
 
     numerical_df = df.drop(columns=[' loan_status', ' education', ' self_employed'])
 
