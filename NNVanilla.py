@@ -9,9 +9,11 @@ from keras.optimizers import Adam, Ftrl
 from keras.metrics import AUC
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
-df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\data\loan_approval_dataset.csv')
+data_file_path = os.getenv("LOAN_DATA_PATH")
+df = pd.read_csv(data_file_path)
 
 collateral_df = df[[' residential_assets_value',  ' commercial_assets_value', ' bank_asset_value', ' luxury_assets_value']]
 

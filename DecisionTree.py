@@ -9,6 +9,7 @@ import multiprocessing as mp
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
+import os
 
 
 
@@ -51,7 +52,7 @@ def get_features(holdout):
 
 def record_results(f1, val_acc, holdout_f1, holdout_acc, hyperparameters, n_features, chosen_features, filename):
 
-    path = r"C:\Users\Blake Dennett\Downloads\Summer2023\ml_results\\" + filename + ".txt" 
+    path = os.getenv('ML_RESULTS_PATH') + filename + ".txt"
 
     with open(path, "a") as f:
         f.write('\n')
@@ -268,22 +269,22 @@ def k_neighbors(best_so_far=0.64):
 
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
     # p1 = mp.Process(target=decision_tree, args=(0.7728911319394377,))
-    p2 = mp.Process(target=xgb, args=(0.774800868935554,))
-    p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
-    p4 = mp.Process(target=random_forest, args=(0.7760758570386579,))
+    # p2 = mp.Process(target=xgb, args=(0.774800868935554,))
+    # p3 = mp.Process(target=gaussian_nb, args=(0.7722342733188721,))
+    # p4 = mp.Process(target=random_forest, args=(0.7760758570386579,))
     # p5 = mp.Process(target=k_neighbors, args=(0.7636092468307233,))
 
     # p1.start()
-    p2.start()
-    p3.start()
-    p4.start()
+    # p2.start()
+    # p3.start()
+    # p4.start()
     # p5.start()
 
     # p1.join()
-    p2.join()
-    p3.join()
-    p4.join()
+    # p2.join()
+    # p3.join()
+    # p4.join()
     # p5.join()

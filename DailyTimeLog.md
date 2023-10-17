@@ -179,7 +179,9 @@
 * github issues
 
 ### Day 36
-* shrinking file (22) 10:26
+* shrinking file
+* environment setup
+* something (1:38)
 
 
 ---------------------------------------------- future notes ----------------------------------------------

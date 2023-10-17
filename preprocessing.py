@@ -10,12 +10,14 @@ import matplotlib.pyplot as plt
 from scipy.stats.mstats import winsorize
 from sklearn.model_selection import StratifiedShuffleSplit
 from imblearn.over_sampling import SMOTE
+import os
 
 
 
 def get_preprocessed_df(with_cibil=False, standard_scaling=False, filtered_features=False, reject_oversample=False):
 
-    df = pd.read_csv(r'C:\Users\Blake Dennett\Downloads\Summer2023\data\loan_approval_dataset.csv')
+    data_file_path = os.getenv("LOAN_DATA_PATH")
+    df = pd.read_csv(data_file_path)
 
     numerical_df = df.drop(columns=[' loan_status', ' education', ' self_employed'])
 
