@@ -1,6 +1,6 @@
-from sklearn.tree import DecisionTreeClassifier
+# from sklearn.tree import DecisionTreeClassifier
 # from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, f1_score
-from sklearn.model_selection import train_test_split
+# from sklearn.model_selection import train_test_split
 import os
 import pandas as pd
 import streamlit as st
