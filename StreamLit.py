@@ -1,6 +1,5 @@
-from preprocessing import get_preprocessed_df
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, f1_score
+# from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, f1_score
 from sklearn.model_selection import train_test_split
 import os
 import pandas as pd
@@ -25,11 +24,11 @@ model.fit(x_train, y_train)
 
 y_pred = model.predict(x_test)
 
-cm = confusion_matrix(y_test, y_pred)
-print(cm)
+# cm = confusion_matrix(y_test, y_pred)
+# print(cm)
 
 
-print("Accuracy:", accuracy_score(y_test, y_pred))
+# print("Accuracy:", accuracy_score(y_test, y_pred))
 
 st.header('Loan Approval Data Project')
 
