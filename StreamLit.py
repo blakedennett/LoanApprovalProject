@@ -9,7 +9,7 @@ import streamlit as st
 features = [' income_annum', ' cibil_score', ' loan_term', ' loan_amount']
 
 # data_file_path = os.getenv("LOAN_DATA_PATH")
-
+# df = pd.read_csv(data_file_path)
 
 # x = df[features]
 
