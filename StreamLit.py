@@ -1,28 +1,28 @@
 # from sklearn.tree import DecisionTreeClassifier
 # from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, f1_score
 # from sklearn.model_selection import train_test_split
-import os
+# import os
 import pandas as pd
 import streamlit as st
 
 
 features = [' income_annum', ' cibil_score', ' loan_term', ' loan_amount']
 
-data_file_path = os.getenv("LOAN_DATA_PATH")
-df = pd.read_csv(data_file_path)
+# data_file_path = os.getenv("LOAN_DATA_PATH")
+# df = pd.read_csv(data_file_path)
 
-x = df[features]
+# x = df[features]
 
-y = df[' loan_status']
+# y = df[' loan_status']
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
-model = DecisionTreeClassifier(random_state=42)
+# model = DecisionTreeClassifier(random_state=42)
 
-model.fit(x_train, y_train)
+# model.fit(x_train, y_train)
 
 
-y_pred = model.predict(x_test)
+# y_pred = model.predict(x_test)
 
 # cm = confusion_matrix(y_test, y_pred)
 # print(cm)
@@ -64,15 +64,15 @@ st.table(data)
 
 display = st.checkbox('Show Results', value=False)
 
-if display:
-    response = model.predict(data)
+# if display:
+#     response = model.predict(data)
 
 
-    if ' Approved' in response:
-        st.write('Approved')
+#     if ' Approved' in response:
+#         st.write('Approved')
         
-    else:
-        st.write('Rejected')
+#     else:
+#         st.write('Rejected')
     
 
 
