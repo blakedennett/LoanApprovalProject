@@ -180,8 +180,31 @@
 
 ### Day 36
 * shrinking file
-* environment setup
-* something (1:38)
+* environment key setup
+* finished environment keys 
+
+## Day 37
+* Data Diagnosis
+* Requirements Specification
+* Getting new data for fips code
+
+## Day 38
+* combined data to get fips name
+* Got spatial map working
+* Transposing and fixing index
+
+## Day 39
+* Converting to Polars dataframe
+* Major population data cleaning
+* Joining population data to rest 
+
+## Day 40
+* Visualizing unemployment
+* Streamlit learning
+* Streamlit creation
+
+## 41
+* Next thing (11) started 3:47
 
 
 ---------------------------------------------- future notes ----------------------------------------------
