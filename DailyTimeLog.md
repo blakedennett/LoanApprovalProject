@@ -204,7 +204,13 @@
 * Streamlit creation
 
 ## 41
-* Next thing (11) started 3:47
+* Getting Streamlit hosted started
+* streamlit requirements errors (35)
+* Practicing Docker (48)  
+
+## 42
+* Teaching Streamlit (25)
+* Teaching Streamlit part 2
 
 
 ---------------------------------------------- future notes ----------------------------------------------

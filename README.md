@@ -29,6 +29,10 @@
 
 <h4>The second part of my project was data analysis. This also took 1 week (18 hours). This phase was a little tough because there was very little insight as to specifics on what the data meant. My graphs really helped me get some ideas though. This was roughly one or two days of data cleaning and the rest was looking into questions I had. Unfortunately, there weren't any dates to work with which could have led to much more work in this area.</h4>
 
+* #### Side Project Employment Data Analysis
+
+<h4>Because there was not much data wrangling that needed done with the loan data. I decided to bring in some more challenging employment data. This can be found in the data folder in the employment_analysis.ipynb file. The spatial map further down in this README file is from the said data.</h4>
+
 * #### Decision Tree Summary 
 
 <h4>The third part of my project was machine learning. This took two weeks (36 hours). I used five different types of decision trees and had the hyperparameters randomly selected in an infinite while loop with each type running in parallel. The results were written to a file when a new best score was found. This took a bit of manual changes and a lot of cpu time but it yielded great results.</h4>
@@ -126,6 +130,15 @@
 <img src="./images/IncomeDependentGraph.PNG" alt="Income Dependent Graph">
 
 <h4>This was simply the first graph I made. It shows the median income according the the number of dependents.</h4>
+
+<br><br>
+
+<img src="./images/spatialEmploymentMap.PNG" alt='Spatial Employment Map'>
+
+<h4>As mentioned in the beginning, this graph comes from my employment data side project. More can be found in the file link below. Unfortunately, the number of employees comes from data.gov and the population comes from the census and it appears that there is a discrepancy here because the highest employment is only 70% and the lowest is 40% in 2022, so there must be an error in here..</h4>
+
+* <a href="./data/employment_analysis.ipynb">Employment Analysis</a>
+
 
 # Data Analysis
 
